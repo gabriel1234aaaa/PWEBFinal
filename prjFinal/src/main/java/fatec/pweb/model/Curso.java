@@ -2,45 +2,102 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Curso {
 
-    private String Sigla;
-    private String Nome;
-    private int CargaHoraria;
-    private double Valor;
-    private String dataVigencia;
-    private double ValorHoraInstrutor;
-    private String Programa;
-    ArrayList<Turma> curso_turma = new ArrayList<>();
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int codigo;
+	private String sigla;
+	private String nome;
+	private int cargaHoraria;
+	private double valor;
+	private String dataVigencia;
+	private double valorHoraInstrutor;
+	private String programa;
+	@OneToMany
+	ArrayList<Turma> turmas = new ArrayList<>();
 
-    public Curso(String Sigla, String Nome) {
-        this.Sigla = Sigla;
-        this.Nome = Nome;
-    }
+	public Curso() {
+	}
 
-    public void setCargaHoraria(int CargaHoraria) {
-        this.CargaHoraria = CargaHoraria;
-    }
+	public Curso(String sigla, String nome) {
+		this.sigla = sigla;
+		this.nome = nome;
+	}
 
-    public void setValor(double Valor) {
-        this.Valor = Valor;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setDataVigencia(String dataVigencia) {
-        this.dataVigencia = dataVigencia;
-    }
+	public String getSigla() {
+		return sigla;
+	}
 
-    public void setValorHoraInstrutor(double ValorHoraInstrutor) {
-        this.ValorHoraInstrutor = ValorHoraInstrutor;
-    }
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
 
-    public void setPrograma(String Programa) {
-        this.Programa = Programa;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void addTurma(Turma t) {
-        t.setCurso(this);
-        curso_turma.add(t);
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public int getCargaHoraria() {
+		return cargaHoraria;
+	}
+
+	public void setCargaHoraria(int cargaHoraria) {
+		this.cargaHoraria = cargaHoraria;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
+	}
+
+	public String getDataVigencia() {
+		return dataVigencia;
+	}
+
+	public void setDataVigencia(String dataVigencia) {
+		this.dataVigencia = dataVigencia;
+	}
+
+	public double getValorHoraInstrutor() {
+		return valorHoraInstrutor;
+	}
+
+	public void setValorHoraInstrutor(double valorHoraInstrutor) {
+		this.valorHoraInstrutor = valorHoraInstrutor;
+	}
+
+	public String getPrograma() {
+		return programa;
+	}
+
+	public void setPrograma(String programa) {
+		this.programa = programa;
+	}
+
+	public ArrayList<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(ArrayList<Turma> turmas) {
+		this.turmas = turmas;
+	}
 
 }

@@ -2,26 +2,56 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
-public class Instrutor extends Pessoa {
-    private String Formacao;
-    private String AreaAtuacao;
-    ArrayList<Turma> inst_turma = new ArrayList<>();
-    
-    public Instrutor(String Nome, String CPF) {
-        super(Nome, CPF);
-    }
-    
-    public void addTurma(Turma t){
-        t.setInstrutor(this);
-        inst_turma.add(t);
-    }
-    
-    public void setFormacao(String Formacao) {
-        this.Formacao = Formacao;
-    }
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
-    public void setAreaAtuacao(String AreaAtuacao) {
-        this.AreaAtuacao = AreaAtuacao;
-    }
-    
+@Entity
+public class Instrutor extends Pessoa {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int codigo;
+	private String formacao;
+	private String areaAtuacao;
+	@OneToMany
+	ArrayList<Turma> turmas = new ArrayList<>();
+
+	public Instrutor() {
+	}
+
+	public Instrutor(String Nome, String CPF) {
+		super(Nome, CPF);
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
+	public String getFormacao() {
+		return formacao;
+	}
+
+	public void setFormacao(String formacao) {
+		this.formacao = formacao;
+	}
+
+	public String getAreaAtuacao() {
+		return areaAtuacao;
+	}
+
+	public void setAreaAtuacao(String areaAtuacao) {
+		this.areaAtuacao = areaAtuacao;
+	}
+
+	public ArrayList<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(ArrayList<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
 }

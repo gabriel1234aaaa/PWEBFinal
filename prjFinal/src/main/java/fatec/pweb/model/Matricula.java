@@ -1,59 +1,84 @@
 package fatec.pweb.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Matricula {
 
-    private String Data;
-    private int QtdeFaltas;
-    private double Nota;
-    private Aluno aluno;
-    private APrazo aprazo;
-    private AVista avista;
-    private Turma turma;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int codigo;
+	private String data;
+	private int qtdeFaltas;
+	private double nota;
+	private Aluno aluno;
+	private APrazo aprazo;
+	private AVista avista;
+	@ManyToOne
+	private Turma turma;
 
-    public void setQtdeFaltas(int QtdeFaltas) {
-        this.QtdeFaltas = QtdeFaltas;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setNota(double Nota) {
-        this.Nota = Nota;
-    }
+	public String getData() {
+		return data;
+	}
 
-    public Matricula(String Data) {
-        this.Data = Data;
-    }
+	public void setData(String data) {
+		this.data = data;
+	}
 
-    public Aluno getAluno() {
-        return aluno;
-    }
+	public int getQtdeFaltas() {
+		return qtdeFaltas;
+	}
 
-    public void setAluno(Aluno aluno) {
-        this.aluno = aluno;
-    }
+	public void setQtdeFaltas(int qtdeFaltas) {
+		this.qtdeFaltas = qtdeFaltas;
+	}
 
-    public APrazo getAprazo() {
-        return aprazo;
-    }
+	public double getNota() {
+		return nota;
+	}
 
-    public AVista getAvista() {
-        return avista;
-    }
+	public void setNota(double nota) {
+		this.nota = nota;
+	}
 
-    public void setAprazo(APrazo aprazo) {
-        avista = null;
-        this.aprazo = aprazo;
-    }
+	public Aluno getAluno() {
+		return aluno;
+	}
 
-    public void setAvista(AVista avista) {
-        aprazo = null;
-        this.avista = avista;
-    }
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
 
-    public Turma getTurma() {
-        return turma;
-    }
+	public APrazo getAprazo() {
+		return aprazo;
+	}
 
-    public void setTurma(Turma turma) {
-        this.turma = turma;
-    }
+	public void setAprazo(APrazo aprazo) {
+		this.aprazo = aprazo;
+	}
+
+	public AVista getAvista() {
+		return avista;
+	}
+
+	public void setAvista(AVista avista) {
+		this.avista = avista;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 
 }

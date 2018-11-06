@@ -2,65 +2,123 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Turma {
-    private String SiglaTurma;
-    private String Descricao;
-    private String Datainicio;
-    private String DataTermino;
-    private String Periodo;
-    private int QtdVagas;
-    private String Observacoes;
-    private Instrutor instrutor;
-    private Curso curso;
-    ArrayList<Matricula> mat_turma = new ArrayList<>();
-    
-    public Turma(String SiglaTurma, String Descricao) {
-        this.SiglaTurma = SiglaTurma;
-        this.Descricao = Descricao;
-    }
 
-    public void setDescricao(String Descricao) {
-        this.Descricao = Descricao;
-    }
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private int codigo;
+	private String siglaTurma;
+	private String descricao;
+	private String datainicio;
+	private String dataTermino;
+	private String periodo;
+	private int qtdeVagas;
+	private String observacoes;
+	@ManyToOne
+	private Instrutor instrutor;
+	@ManyToOne
+	private Curso curso;
+	@OneToMany
+	ArrayList<Matricula> matriculas = new ArrayList<>();
 
-    public void setDatainicio(String Datainicio) {
-        this.Datainicio = Datainicio;
-    }
+	public Turma() {
+	}
 
-    public void setDataTermino(String DataTermino) {
-        this.DataTermino = DataTermino;
-    }
+	public Turma(String SiglaTurma, String Descricao) {
+		this.siglaTurma = SiglaTurma;
+		this.descricao = Descricao;
+	}
 
-    public void setPeriodo(String Periodo) {
-        this.Periodo = Periodo;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setQtdVagas(int QtdVagas) {
-        this.QtdVagas = QtdVagas;
-    }
+	public String getSiglaTurma() {
+		return siglaTurma;
+	}
 
-    public void setObservacoes(String Observacoes) {
-        this.Observacoes = Observacoes;
-    }
+	public void setSiglaTurma(String siglaTurma) {
+		this.siglaTurma = siglaTurma;
+	}
 
-    public Instrutor getInstrutor() {
-        return instrutor;
-    }
+	public String getDescricao() {
+		return descricao;
+	}
 
-    public void setInstrutor(Instrutor instrutor) {
-        this.instrutor = instrutor;
-    }
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
 
-    public Curso getCurso() {
-        return curso;
-    }
+	public String getDatainicio() {
+		return datainicio;
+	}
 
-    public void setCurso(Curso curso) {
-        this.curso = curso;
-    }
-    
-    public void addMatricula(Matricula m){
-        m.setTurma(this);
-        mat_turma.add(m);
-    }
+	public void setDatainicio(String datainicio) {
+		this.datainicio = datainicio;
+	}
+
+	public String getDataTermino() {
+		return dataTermino;
+	}
+
+	public void setDataTermino(String dataTermino) {
+		this.dataTermino = dataTermino;
+	}
+
+	public String getPeriodo() {
+		return periodo;
+	}
+
+	public void setPeriodo(String periodo) {
+		this.periodo = periodo;
+	}
+
+	public int getQtdeVagas() {
+		return qtdeVagas;
+	}
+
+	public void setQtdeVagas(int qtdeVagas) {
+		this.qtdeVagas = qtdeVagas;
+	}
+
+	public String getObservacoes() {
+		return observacoes;
+	}
+
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
+	}
+
+	public Instrutor getInstrutor() {
+		return instrutor;
+	}
+
+	public void setInstrutor(Instrutor instrutor) {
+		this.instrutor = instrutor;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	public ArrayList<Matricula> getMatriculas() {
+		return matriculas;
+	}
+
+	public void setMatriculas(ArrayList<Matricula> matriculas) {
+		this.matriculas = matriculas;
+	}
+
 }

@@ -7,23 +7,31 @@ import javax.persistence.Id;
 
 @Entity
 public class Aluno extends Pessoa {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int codigo;
-    private String Escolaridade;
-    private Matricula matricula;
+	private String escolaridade;
+	private Matricula matricula;
 
-	public Matricula getAluno_matricula() {
-        return matricula;
-    }
+	public String getEscolaridade() {
+		return escolaridade;
+	}
 
-    public void setMatricula(Matricula matricula) {
-        this.matricula = matricula;
-        matricula.setAluno(this);
-    }
-    
-    public void setEscolaridade(String Escolaridade) {
-        this.Escolaridade = Escolaridade;
-    }
-    
+	public void setEscolaridade(String escolaridade) {
+		this.escolaridade = escolaridade;
+	}
+
+	public Matricula getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(Matricula matricula) {
+		this.matricula = matricula;
+	}
+
+	public int getCodigo() {
+		return codigo;
+	}
+
 }
