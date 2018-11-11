@@ -1,0 +1,62 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+
+	<ui:define name="title">
+		<h:outputText value="Cursos" />
+	</ui:define>
+
+	<ui:define name="principal">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="txtSiglaCurso" value="Sigla curso " />
+				<p:inputText id="txtSiglaCurso" />
+
+				<p:outputLabel for="txtNomeCurso" value="Nome curso " />
+				<p:inputText id="txtNomeCurso" disabled="true" />
+
+				<p:outputLabel for="txtCargaHor" value="Carga horária" />
+				<p:inputText id="txtCargaHor" disabled="true" />
+
+				<p:outputLabel for="txtValCurso" value="Valor curso" />
+				<p:inputText id="txtValCurso" disabled="true" />
+
+				<p:outputLabel for="txtProgCurso" value="Programa curso" />
+				<p:inputText id="txtProgCurso" disabled="true" />
+
+				<p:outputLabel for="txtDataVig" value="Data de Vigência" />
+				<p:inputMask id="txtDataVig" value="#{maskView.date}"
+					mask="99/99/9999" disabled="true" />
+
+				<p:outputLabel for="txtValHoraInst" value="Valor hora instrutor" />
+				<p:inputText id="txtValHoraInst" disabled="true" />
+
+			</h:panelGrid>
+
+			<p:commandButton value="Consultar" id="btnConsultar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+
+			<p:commandButton value="Inserir" id="btnInserir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Alterar" id="btnAlterar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Excluir" id="btnExcluir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Sair" id="btnSair"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
