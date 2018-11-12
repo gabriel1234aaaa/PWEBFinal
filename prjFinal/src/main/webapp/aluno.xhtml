@@ -1,0 +1,113 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+
+	<ui:define name="title">
+		<h:outputText value="Alunos" />
+	</ui:define>
+
+	<ui:define name="principal">
+		<h:form>
+			<h:panelGrid columns="4" cellpadding="5">
+				<p:outputLabel for="txtCpf" value="CPF" />
+				<p:inputText id="txtCpf" />
+
+				<p:outputLabel value="" />
+				<p:outputLabel value="" />
+
+				<p:outputLabel for="txtNome" value="Nome" />
+				<p:inputText id="txtNome" disabled="true" />
+
+				<p:outputLabel for="txtNascimento" value="Data de Nascimento" />
+				<p:inputMask id="txtNascimento" value="#{maskView.date}"
+					mask="99/99/9999" disabled="true" />
+
+				<p:outputLabel for="cbxSexo" value="Sexo" />
+				<h:selectOneMenu disabled="true" id="cbxSexo">
+					<f:selectItem itemValue="1" itemLabel="Masculino" />
+					<f:selectItem itemValue="2" itemLabel="Feminino" />
+				</h:selectOneMenu>
+				
+				<p:outputLabel for="cbxEstCivil" value="Estado Civil" />
+				<h:selectOneMenu disabled="true" id="cbxEstCivil">
+					<f:selectItem itemValue="1" itemLabel="Solteiro" />
+					<f:selectItem itemValue="2" itemLabel="Casado" />
+					<f:selectItem itemValue="3" itemLabel="Divorciado" />
+				</h:selectOneMenu>
+				
+				<p:outputLabel for="cbxEscolaridade" value="Escolaridade" />
+				<h:selectOneMenu disabled="true" id="cbxEscolaridade">
+					<f:selectItem itemValue="1" itemLabel="Ensino Superior Cursando" />
+					<f:selectItem itemValue="2" itemLabel="Ensino Superior Completo" />
+				</h:selectOneMenu>
+				
+				<p:outputLabel value="" />
+				<p:outputLabel value="" />
+
+				<p:outputLabel for="txtRua" value="Rua" />
+				<p:inputText id="txtRua" disabled="true" />
+
+				<p:outputLabel for="txtNumero" value="Número" />
+				<p:inputText id="txtNumero" disabled="true" />
+
+				<p:outputLabel for="txtBairro" value="Bairro" />
+				<p:inputText id="txtBairro" disabled="true" />
+
+				<p:outputLabel for="txtCep" value="CEP" />
+				<p:inputMask id="txtCep" value="#{maskView.date}"
+					mask="99999-999" disabled="true" />
+
+				<p:outputLabel for="txtCidade" value="Cidade" />
+				<p:inputText id="txtCidade" disabled="true" />
+				
+				<p:outputLabel for="cbxEstado" value="Estado" />
+				<h:selectOneMenu disabled="true" id="cbxEstado">
+					<f:selectItem itemValue="1" itemLabel="SP" />
+					<f:selectItem itemValue="2" itemLabel="RS" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="txtTelResidencial" value="Tel. Residencial" />
+				<p:inputMask id="txtTelResidencial" value="#{maskView.date}"
+					mask="(99) 9999-9999?" disabled="true" />
+				
+				<p:outputLabel for="txtRG" value="RG" />
+				<p:inputMask id="txtRG" value="#{maskView.date}"
+					mask="99.999.999-9" disabled="true" />
+				
+				
+				<p:outputLabel for="txtCelular" value="Celular" />
+				<p:inputMask id="txtCelular" value="#{maskView.date}"
+					mask="(99) 9999-9999?" disabled="true" />
+
+				<p:outputLabel for="txtEmail" value="Email" />
+				<p:inputText id="txtEmail" disabled="true" />
+
+			</h:panelGrid>
+
+			<p:commandButton value="Consultar" id="btnConsultar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+
+			<p:commandButton value="Inserir" id="btnInserir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Alterar" id="btnAlterar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Excluir" id="btnExcluir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Sair" id="btnSair"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

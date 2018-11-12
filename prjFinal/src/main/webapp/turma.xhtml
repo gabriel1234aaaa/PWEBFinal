@@ -1,0 +1,70 @@
+<ui:composition template="template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+
+	<ui:define name="title">
+		<h:outputText value="Cursos" />
+	</ui:define>
+
+	<ui:define name="principal">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+				<p:outputLabel for="cbxCurso" value="Curso" />
+				<h:selectOneMenu disabled="true" id="cbxCurso">
+					<f:selectItem itemValue="1" itemLabel="Administração" />
+					<f:selectItem itemValue="2" itemLabel="Contabilidade" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="txtSigla" value="Sigla da Turma" />
+				<p:inputText id="txtSigla" disabled="true" />
+
+				<p:outputLabel for="txtNome" value="Nome" />
+				<p:inputText id="txtNome" disabled="true" />
+
+				<p:outputLabel for="txtQtdeVagas" value="Quantidade de Vagas" />
+				<p:inputText id="txtQtdeVagas" disabled="true" />
+
+				<p:outputLabel for="cbxPeriodo" value="Período" />
+				<h:selectOneMenu disabled="true" id="cbxPeriodo">
+					<f:selectItem itemValue="1" itemLabel="Manhã" />
+					<f:selectItem itemValue="2" itemLabel="Tarde" />
+					<f:selectItem itemValue="3" itemLabel="Noite" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="txtDataInicio" value="Data de Início" />
+				<p:inputMask id="txtDataInicio" value="#{maskView.date}"
+					mask="99/99/9999" disabled="true" />
+
+				<p:outputLabel for="txtDataTermino" value="Data de Término" />
+				<p:inputMask id="txtDataTermino" value="#{maskView.date}"
+					mask="99/99/9999" disabled="true" />
+
+			</h:panelGrid>
+
+			<p:commandButton value="Consultar" id="btnConsultar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+
+			<p:commandButton value="Inserir" id="btnInserir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Alterar" id="btnAlterar"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Excluir" id="btnExcluir"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+
+
+			<p:commandButton value="Sair" id="btnSair"
+				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
