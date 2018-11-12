@@ -19,15 +19,15 @@
 
 	<p:layout id="globalLayout" fullPage="true">
 		<p:layoutUnit position="north">
-			<ui:include src="menu.xhtml" />
+			<ui:include src="comuns/menu.xhtml" /> 
 		</p:layoutUnit>
 
 		<p:layoutUnit position="center">
 			<ui:insert name="principal" />
 		</p:layoutUnit>
 
-		<p:layoutUnit position="south">
-			<ui:include src="rodape.xhtml" />
+		<p:layoutUnit position="south" size="100">
+			<ui:include src="comuns/rodape.xhtml" />
 		</p:layoutUnit>
 	</p:layout>
 
