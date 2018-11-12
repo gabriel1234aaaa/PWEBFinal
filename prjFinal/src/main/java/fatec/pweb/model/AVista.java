@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class AVista {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
 	private double valor;
 	private int agencia;

@@ -22,7 +22,7 @@ public class Turma {
 	private Instrutor instrutor;
 	@ManyToOne
 	private Curso curso;
-	@OneToMany
+	@OneToMany(mappedBy = "turma")
 	ArrayList<Matricula> matriculas = new ArrayList<>();
 
 	public Turma() {

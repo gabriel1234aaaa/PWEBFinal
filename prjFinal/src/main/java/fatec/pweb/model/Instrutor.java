@@ -2,15 +2,17 @@ package fatec.pweb.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
+@DiscriminatorValue("I")
 public class Instrutor extends Pessoa {
 
 	private String formacao;
 	private String areaAtuacao;
-	@OneToMany
+	@OneToMany(mappedBy = "instrutor")
 	ArrayList<Turma> turmas = new ArrayList<>();
 
 	public Instrutor() {

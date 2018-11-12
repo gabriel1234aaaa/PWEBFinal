@@ -17,7 +17,7 @@ public class Curso {
 	private String dataVigencia;
 	private double valorHoraInstrutor;
 	private String programa;
-	@OneToMany
+	@OneToMany(mappedBy = "curso")
 	ArrayList<Turma> turmas = new ArrayList<>();
 
 	public Curso() {

@@ -10,7 +10,7 @@
 		<class>fatec.pweb.model.Turma</class>
 		<class>fatec.pweb.model.Pessoa</class>
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/DBPrjFinal;create=true"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/DBFinal;create=true"/>
 			<property name="javax.persistence.jdbc.user" value="user"/>
 			<property name="javax.persistence.jdbc.password" value="pwd"/>
 			<property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.ClientDriver"/>

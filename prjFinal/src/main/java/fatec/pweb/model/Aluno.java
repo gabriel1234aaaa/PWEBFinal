@@ -1,9 +1,11 @@
 package fatec.pweb.model;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 @Entity
+@DiscriminatorValue("A")
 public class Aluno extends Pessoa {
 
 	private String escolaridade;

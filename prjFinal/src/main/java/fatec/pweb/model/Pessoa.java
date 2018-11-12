@@ -1,9 +1,15 @@
 package fatec.pweb.model;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "tipoPessoa", discriminatorType = DiscriminatorType.CHAR, columnDefinition = "CHAR(1)")
 public abstract class Pessoa {
 
 	@Id

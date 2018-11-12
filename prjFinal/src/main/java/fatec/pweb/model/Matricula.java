@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 public class Matricula {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int codigo;
 	private String data;
 	private int qtdeFaltas;
