@@ -3,8 +3,6 @@ package fatec.pweb.model;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,8 +10,6 @@ import javax.persistence.OneToMany;
 public class Curso {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int codigo;
 	private String sigla;
 	private String nome;
 	private int cargaHoraria;
@@ -30,10 +26,6 @@ public class Curso {
 	public Curso(String sigla, String nome) {
 		this.sigla = sigla;
 		this.nome = nome;
-	}
-
-	public int getCodigo() {
-		return codigo;
 	}
 
 	public String getSigla() {

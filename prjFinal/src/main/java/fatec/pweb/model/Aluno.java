@@ -1,17 +1,13 @@
 package fatec.pweb.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Aluno extends Pessoa {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int codigo;
 	private String escolaridade;
+	@OneToOne
 	private Matricula matricula;
 
 	public String getEscolaridade() {
@@ -28,10 +24,6 @@ public class Aluno extends Pessoa {
 
 	public void setMatricula(Matricula matricula) {
 		this.matricula = matricula;
-	}
-
-	public int getCodigo() {
-		return codigo;
 	}
 
 }

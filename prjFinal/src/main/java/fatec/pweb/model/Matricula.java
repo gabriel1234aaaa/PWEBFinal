@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Matricula {
@@ -15,8 +16,11 @@ public class Matricula {
 	private String data;
 	private int qtdeFaltas;
 	private double nota;
+	@OneToOne
 	private Aluno aluno;
+	@OneToOne
 	private APrazo aprazo;
+	@OneToOne
 	private AVista avista;
 	@ManyToOne
 	private Turma turma;

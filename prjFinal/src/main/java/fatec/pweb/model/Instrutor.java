@@ -3,17 +3,11 @@ package fatec.pweb.model;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Instrutor extends Pessoa {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int codigo;
 	private String formacao;
 	private String areaAtuacao;
 	@OneToMany
@@ -24,10 +18,6 @@ public class Instrutor extends Pessoa {
 
 	public Instrutor(String Nome, String CPF) {
 		super(Nome, CPF);
-	}
-
-	public int getCodigo() {
-		return codigo;
 	}
 
 	public String getFormacao() {
