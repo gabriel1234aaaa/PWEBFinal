@@ -8,11 +8,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-public abstract class daoImpl <T, I extends Serializable>{
+public abstract class DAOImpl <T,I extends Serializable>{
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 
-	public daoImpl() {
+	public DAOImpl() {
 	    	
 	    	emf = Persistence.createEntityManagerFactory("prjPwebFinal");
 
