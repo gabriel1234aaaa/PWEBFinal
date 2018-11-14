@@ -2,12 +2,12 @@ package fatec.pweb.service;
 
 import java.util.List;
 
-import fatec.pweb.dao.DAOCurso;
+import fatec.pweb.dao.CursoDAO;
 import fatec.pweb.model.Curso;
 
 public class CursoService {
 
-DAOCurso cursoDAO = new DAOCurso();
+CursoDAO cursoDAO = new CursoDAO();
  	
 	public Curso salvar(Curso curso)
 	{

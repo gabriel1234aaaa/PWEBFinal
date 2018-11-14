@@ -2,11 +2,11 @@ package fatec.pweb.service;
 
 import java.util.List;
 
-import fatec.pweb.dao.DAOAPrazo;
+import fatec.pweb.dao.APrazoDAO;
 import fatec.pweb.model.APrazo;
 
 public class APrazoService {
-DAOAPrazo aPrazoDAO = new DAOAPrazo();
+APrazoDAO aPrazoDAO = new APrazoDAO();
  	
 	public APrazo salvar(APrazo aPrazo)
 	{

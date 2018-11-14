@@ -2,11 +2,11 @@ package fatec.pweb.service;
 
 import java.util.List;
 
-import fatec.pweb.dao.DAOTurma;
+import fatec.pweb.dao.TurmaDAO;
 import fatec.pweb.model.Turma;
 
 public class TurmaService {
-	DAOTurma turmaDAO = new DAOTurma();
+	TurmaDAO turmaDAO = new TurmaDAO();
 
 	public Turma salvar(Turma turma) {
 		turma = turmaDAO.save(turma);

@@ -1,5 +1,5 @@
 package fatec.pweb.service;
 
-public class AVista {
+public class AVistaService {
 
 }

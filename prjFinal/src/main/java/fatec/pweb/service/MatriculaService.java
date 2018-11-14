@@ -2,11 +2,11 @@ package fatec.pweb.service;
 
 import java.util.List;
 
-import fatec.pweb.dao.DAOMatricula;
+import fatec.pweb.dao.MatriculaDAO;
 import fatec.pweb.model.Matricula;
 
 public class MatriculaService {
-	DAOMatricula matriculaDAO = new DAOMatricula();
+	MatriculaDAO matriculaDAO = new MatriculaDAO();
 
 	public Matricula salvar(Matricula matricula) {
 		matricula = matriculaDAO.save(matricula);
