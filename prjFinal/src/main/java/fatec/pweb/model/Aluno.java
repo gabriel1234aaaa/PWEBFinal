@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 public class Aluno extends Pessoa {
 
 	private String escolaridade;
-	@OneToOne
+	@OneToOne(mappedBy = "aluno")
 	private Matricula matricula;
 
 	public String getEscolaridade() {
