@@ -2,6 +2,8 @@ package fatec.pweb.service;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import fatec.pweb.dao.AlunoDAO;
 import fatec.pweb.model.Aluno;
 
@@ -21,4 +23,9 @@ public class AlunoService {
 		return lista;
 	}
 	
+	public Aluno getAlunoByNome(String nome) {
+		Query query = alunoDAO.getEntityManager().createQuery("SELECT o FROM Aluno WHERE o.nome = :nome");
+		query.setParameter("nome", nome);
+		return (Aluno) query.getSingleResult();
+	}
 }

@@ -15,7 +15,7 @@ public class TurmaService {
 
 	}
 
-	public List<Turma> getCursos() {
+	public List<Turma> getTurmas() {
 		List<Turma> list = turmaDAO.getAll(Turma.class);
 		turmaDAO.closeEntityManager();
 		return list;
@@ -27,9 +27,14 @@ public class TurmaService {
 	}
 
 	public void remover(Turma turma) {
-
 		turma = turmaDAO.getById(Turma.class, turma.getSiglaTurma());
 		turmaDAO.remove(turma);
 		turmaDAO.closeEntityManager();
+	}
+
+	public Turma getTurmaById(Turma turma) {
+		turma = turmaDAO.getById(Turma.class, turma.getSiglaTurma());
+		turmaDAO.closeEntityManager();
+		return turma;
 	}
 }

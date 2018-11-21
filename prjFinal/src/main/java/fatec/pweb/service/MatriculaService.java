@@ -15,7 +15,7 @@ public class MatriculaService {
 
 	}
 
-	public List<Matricula> getCursos() {
+	public List<Matricula> getMatriculas() {
 		List<Matricula> list = matriculaDAO.getAll(Matricula.class);
 		matriculaDAO.closeEntityManager();
 		return list;
