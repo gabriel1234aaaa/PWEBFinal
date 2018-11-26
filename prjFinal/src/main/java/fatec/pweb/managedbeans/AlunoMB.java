@@ -15,7 +15,7 @@ public class AlunoMB {
 	Aluno aluno = new Aluno();
 	AlunoService servico = new AlunoService();
 	List<Aluno> alunos;
-	boolean habilitarCorpo = true;
+	boolean habilitarCorpo = false;
 	boolean modoInsercao = false;
 	boolean modoAlteracao = false;
 
@@ -34,6 +34,22 @@ public class AlunoMB {
 	public void setHabilitarCorpo(boolean habilitarCorpo) {
 		this.habilitarCorpo = habilitarCorpo;
 	}
+	
+	public boolean isModoInsercao() {
+		return modoInsercao;
+	}
+
+	public void setModoInsercao(boolean modoInsercao) {
+		this.modoInsercao = modoInsercao;
+	}
+
+	public boolean isModoAlteracao() {
+		return modoAlteracao;
+	}
+
+	public void setModoAlteracao(boolean modoAlteracao) {
+		this.modoAlteracao = modoAlteracao;
+	}
 
 	public void salvar() {
 		aluno = servico.salvar(aluno);
@@ -41,11 +57,20 @@ public class AlunoMB {
 			alunos.add(aluno);
 		}
 		aluno = new Aluno();
+		
+		habilitarCorpo = false;
+		modoAlteracao = false;
+		modoInsercao = false;
 	}
 
-	public void remover(Aluno aluno) {
+	public void remover() {
 		servico.remover(aluno);
 		alunos.remove(aluno);
+		
+		habilitarCorpo = false;
+		modoAlteracao = false;
+		modoInsercao = false;
+		
 	}
 
 	public List<Aluno> getAlunos() {
@@ -58,9 +83,14 @@ public class AlunoMB {
 	
 	public void consultar(){
 		Aluno consulta = servico.getById(aluno);
-		habilitarCorpo = false;
+		habilitarCorpo = true;
 		if(consulta != null){
 			aluno = consulta;
+			modoAlteracao = true;
+			modoInsercao = false;
+		}else{
+			modoAlteracao = false;
+			modoInsercao = true;
 		}
 	}
 
