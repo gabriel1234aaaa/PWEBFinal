@@ -11,86 +11,129 @@
 	</ui:define>
 
 	<ui:define name="principal">
-		<h:form>
+		<h:form id="formAluno">
 			<h:panelGrid columns="4" cellpadding="5">
 				<p:outputLabel for="txtCpf" value="CPF" />
-				<p:inputText id="txtCpf" />
+				<p:inputMask id="txtCpf" value="#{alunoMB.aluno.cpf}"
+					mask="999.999.999-99" disabled="#{not alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel value="" />
 				<p:outputLabel value="" />
 
 				<p:outputLabel for="txtNome" value="Nome" />
-				<p:inputText id="txtNome" disabled="true" />
+				<p:inputText id="txtNome" value="#{alunoMB.aluno.nome}"
+					disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtNascimento" value="Data de Nascimento" />
-				<p:inputMask id="txtNascimento" value="#{maskView.date}"
-					mask="99/99/9999" disabled="true" />
+				<p:inputMask id="txtNascimento" value="#{alunoMB.aluno.dataNasc}"
+					mask="99/99/9999" disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="cbxSexo" value="Sexo" />
-				<h:selectOneMenu disabled="true" id="cbxSexo">
-					<f:selectItem itemValue="1" itemLabel="Masculino" />
-					<f:selectItem itemValue="2" itemLabel="Feminino" />
+				<h:selectOneMenu disabled="#{alunoMB.habilitarCorpo}"
+					value="#{alunoMB.aluno.sexo}" id="cbxSexo">
+					<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+					<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
 				</h:selectOneMenu>
-				
+
 				<p:outputLabel for="cbxEstCivil" value="Estado Civil" />
-				<h:selectOneMenu disabled="true" id="cbxEstCivil">
-					<f:selectItem itemValue="1" itemLabel="Solteiro" />
-					<f:selectItem itemValue="2" itemLabel="Casado" />
-					<f:selectItem itemValue="3" itemLabel="Divorciado" />
+				<h:selectOneMenu disabled="#{alunoMB.habilitarCorpo}"
+					value="#{alunoMB.aluno.estadoCivil}" id="cbxEstCivil">
+					<f:selectItem itemValue="Solteiro" itemLabel="Solteiro" />
+					<f:selectItem itemValue="Casado" itemLabel="Casado" />
+					<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
 				</h:selectOneMenu>
-				
+
 				<p:outputLabel for="cbxEscolaridade" value="Escolaridade" />
-				<h:selectOneMenu disabled="true" id="cbxEscolaridade">
-					<f:selectItem itemValue="1" itemLabel="Ensino Superior Cursando" />
-					<f:selectItem itemValue="2" itemLabel="Ensino Superior Completo" />
+				<h:selectOneMenu disabled="#{alunoMB.habilitarCorpo}"
+					value="#{alunoMB.aluno.escolaridade}" id="cbxEscolaridade">
+					<f:selectItem itemValue="Ensino Médio Cursando"
+						itemLabel="Ensino Médio Cursando" />
+					<f:selectItem itemValue="Ensino Médio Completo"
+						itemLabel="Ensino Médio Completo" />
+					<f:selectItem itemValue="Ensino Superior Cursando"
+						itemLabel="Ensino Superior Cursando" />
+					<f:selectItem itemValue="Ensino Superior Completo"
+						itemLabel="Ensino Superior Completo" />
 				</h:selectOneMenu>
-				
+
 				<p:outputLabel value="" />
 				<p:outputLabel value="" />
 
-				<p:outputLabel for="txtRua" value="Rua" />
-				<p:inputText id="txtRua" disabled="true" />
+				<p:outputLabel for="txtEndereco" value="Endereço" />
+				<p:inputText id="txtEndereco" value="#{alunoMB.aluno.endereco}"
+					disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtNumero" value="Número" />
-				<p:inputText id="txtNumero" disabled="true" />
+				<p:inputText id="txtNumero" value="#{alunoMB.aluno.numero}"
+					disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtBairro" value="Bairro" />
-				<p:inputText id="txtBairro" disabled="true" />
+				<p:inputText id="txtBairro" value="#{alunoMB.aluno.bairro}"
+					disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtCep" value="CEP" />
-				<p:inputMask id="txtCep" value="#{maskView.date}"
-					mask="99999-999" disabled="true" />
+				<p:inputMask id="txtCep" value="#{alunoMB.aluno.cep}"
+					mask="99999-999" disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtCidade" value="Cidade" />
-				<p:inputText id="txtCidade" disabled="true" />
-				
+				<p:inputText id="txtCidade" value="#{alunoMB.aluno.cidade}"
+					disabled="#{alunoMB.habilitarCorpo}" />
+
 				<p:outputLabel for="cbxEstado" value="Estado" />
-				<h:selectOneMenu disabled="true" id="cbxEstado">
-					<f:selectItem itemValue="1" itemLabel="SP" />
-					<f:selectItem itemValue="2" itemLabel="RS" />
+				<h:selectOneMenu disabled="#{alunoMB.habilitarCorpo}"
+					value="#{alunoMB.aluno.estado}" id="cbxEstado">
+					<f:selectItem itemValue="AC" itemLabel="AC" />
+					<f:selectItem itemValue="AL" itemLabel="AL" />
+					<f:selectItem itemValue="AP" itemLabel="AP" />
+					<f:selectItem itemValue="AM" itemLabel="AM" />
+					<f:selectItem itemValue="BA" itemLabel="BA" />
+					<f:selectItem itemValue="CE" itemLabel="CE" />
+					<f:selectItem itemValue="DF" itemLabel="DF" />
+					<f:selectItem itemValue="ES" itemLabel="ES" />
+					<f:selectItem itemValue="GO" itemLabel="GO" />
+					<f:selectItem itemValue="MA" itemLabel="MA" />
+					<f:selectItem itemValue="MT" itemLabel="MT" />
+					<f:selectItem itemValue="MS" itemLabel="MS" />
+					<f:selectItem itemValue="MG" itemLabel="MG" />
+					<f:selectItem itemValue="PA" itemLabel="PA" />
+					<f:selectItem itemValue="PA" itemLabel="PA" />
+					<f:selectItem itemValue="PB" itemLabel="PB" />
+					<f:selectItem itemValue="PR" itemLabel="PR" />
+					<f:selectItem itemValue="PE" itemLabel="PE" />
+					<f:selectItem itemValue="PI" itemLabel="PI" />
+					<f:selectItem itemValue="RJ" itemLabel="RJ" />
+					<f:selectItem itemValue="RN" itemLabel="RN" />
+					<f:selectItem itemValue="RS" itemLabel="RS" />
+					<f:selectItem itemValue="RO" itemLabel="RO" />
+					<f:selectItem itemValue="RR" itemLabel="RR" />
+					<f:selectItem itemValue="SC" itemLabel="SC" />
+					<f:selectItem itemValue="SP" itemLabel="SP" />
+					<f:selectItem itemValue="SE" itemLabel="SE" />
+					<f:selectItem itemValue="TO" itemLabel="TO" />
 				</h:selectOneMenu>
 
-				<p:outputLabel for="txtTelResidencial" value="Tel. Residencial" />
-				<p:inputMask id="txtTelResidencial" value="#{maskView.date}"
-					mask="(99) 9999-9999?" disabled="true" />
-				
+				<p:outputLabel for="txtTelefone" value="Telefone" />
+				<p:inputMask id="txtTelefone" value="#{alunoMB.aluno.telefone}"
+					mask="(99) 9999-9999?" disabled="#{alunoMB.habilitarCorpo}" />
+
 				<p:outputLabel for="txtRG" value="RG" />
-				<p:inputMask id="txtRG" value="#{maskView.date}"
-					mask="99.999.999-9" disabled="true" />
-				
-				
+				<p:inputMask id="txtRG" value="#{alunoMB.aluno.rg}"
+					mask="99.999.999-9" disabled="#{alunoMB.habilitarCorpo}" />
+
+
 				<p:outputLabel for="txtCelular" value="Celular" />
-				<p:inputMask id="txtCelular" value="#{maskView.date}"
-					mask="(99) 9999-9999?" disabled="true" />
+				<p:inputMask id="txtCelular" value="#{alunoMB.aluno.celular}"
+					mask="(99) 9999-9999?" disabled="#{alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtEmail" value="Email" />
-				<p:inputText id="txtEmail" disabled="true" />
-
+				<p:inputText id="txtEmail" value="#{alunoMB.aluno.email}"
+					disabled="#{alunoMB.habilitarCorpo}" />
 			</h:panelGrid>
 
-			<p:commandButton value="Consultar" id="btnConsultar"
+			<p:commandButton value="Consultar"
+				disabled="#{not alunoMB.habilitarCorpo}" update=":formAluno"
+				action="#{alunoMB.consultar}" id="btnConsultar"
 				styleClass="ui-priority-primary" icon="ui-icon-disk" />
-
 
 			<p:commandButton value="Inserir" id="btnInserir"
 				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />

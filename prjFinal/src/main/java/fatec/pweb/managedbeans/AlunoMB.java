@@ -1,50 +1,67 @@
-//package fatec.pweb.managedbeans;
-//
-//import java.util.List;
-//
-//import javax.faces.bean.ManagedBean;
-//import javax.faces.bean.SessionScoped;
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.Persistence;
-//
-//import fatec.pweb.model.Aluno;
-//
-//
-//@ManagedBean
-//@SessionScoped
-//public class AlunoMB {
-//	private Aluno aluno = new Aluno();
-//	private EntityManagerFactory emf;
-//	
-//	public AlunoMB() {
-//		emf = Persistence.createEntityManagerFactory("prjPwebFinal");//persistence.xml>general>name
-//	}	
-//	
-//	public void salvar() {
-//		EntityManager em = emf.createEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(aluno);
-//		em.getTransaction().commit();
-//		em.close();
-//		aluno = new Aluno();
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	public List<Aluno> getAlunos() {
-//		List <Aluno> lista;
-//		EntityManager em = emf.createEntityManager();
-//		lista = em.createQuery("Select a from Aluno a").getResultList();
-//		em.close();
-//		return lista;
-//	}
-//
-//	public Aluno getAluno() {
-//		return aluno;
-//	}
-//
-//	public void setAluno(Aluno aluno) {
-//		this.aluno = aluno;
-//	}
-//	
-//}
+package fatec.pweb.managedbeans;
+
+import java.util.List;
+
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+
+import fatec.pweb.model.Aluno;
+import fatec.pweb.service.AlunoService;
+
+@ManagedBean
+@ViewScoped
+public class AlunoMB {
+
+	Aluno aluno = new Aluno();
+	AlunoService servico = new AlunoService();
+	List<Aluno> alunos;
+	boolean habilitarCorpo = true;
+	boolean modoInsercao = false;
+	boolean modoAlteracao = false;
+
+	public Aluno getAluno() {
+		return aluno;
+	}
+
+	public void setAluno(Aluno aluno) {
+		this.aluno = aluno;
+	}
+
+	public boolean isHabilitarCorpo() {
+		return habilitarCorpo;
+	}
+
+	public void setHabilitarCorpo(boolean habilitarCorpo) {
+		this.habilitarCorpo = habilitarCorpo;
+	}
+
+	public void salvar() {
+		aluno = servico.salvar(aluno);
+		if (alunos != null) {
+			alunos.add(aluno);
+		}
+		aluno = new Aluno();
+	}
+
+	public void remover(Aluno aluno) {
+		servico.remover(aluno);
+		alunos.remove(aluno);
+	}
+
+	public List<Aluno> getAlunos() {
+		if (alunos == null) {
+			alunos = servico.getAlunos();
+		}
+
+		return alunos;
+	}
+	
+	public void consultar(){
+		Aluno consulta = servico.getById(aluno);
+		habilitarCorpo = false;
+		if(consulta != null){
+			aluno = consulta;
+		}
+	}
+
+}
