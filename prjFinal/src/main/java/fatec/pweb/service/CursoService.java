@@ -40,5 +40,11 @@ public class CursoService {
 		query.setParameter("nome", nome);
 		return (Curso) query.getSingleResult();
 	}
+	
+	public Curso getById(Curso curso){
+		curso = cursoDAO.getById(Curso.class, curso.getSigla());
+		cursoDAO.closeEntityManager();
+		return curso;
+	}
 
 }
