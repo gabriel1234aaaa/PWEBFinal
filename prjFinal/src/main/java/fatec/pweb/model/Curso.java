@@ -1,5 +1,6 @@
 package fatec.pweb.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.Entity;
@@ -7,8 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Curso {
+public class Curso implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String sigla;
 	private String nome;

@@ -36,7 +36,7 @@ public class AlunoMB implements Serializable {
 	public void setHabilitarCorpo(boolean habilitarCorpo) {
 		this.habilitarCorpo = habilitarCorpo;
 	}
-	
+
 	public boolean isModoInsercao() {
 		return modoInsercao;
 	}
@@ -55,8 +55,14 @@ public class AlunoMB implements Serializable {
 
 	public void salvar() {
 		aluno = servico.salvar(aluno);
+		if (modoInsercao) {
+			Util.addInfo("Inserção", "O aluno foi inserido com sucesso!");
+		} else {
+			Util.addInfo("Alteração", "O aluno foi alterado com sucesso!");
+		}
+
 		aluno = new Aluno();
-		
+
 		habilitarCorpo = false;
 		modoAlteracao = false;
 		modoInsercao = false;
@@ -64,35 +70,37 @@ public class AlunoMB implements Serializable {
 
 	public void remover() {
 		servico.remover(aluno);
-		Util.addMessage("Exclusão", "O aluno foi excluído com sucesso!");
+		Util.addInfo("Exclusão", "O aluno foi excluído com sucesso!");
 		aluno = new Aluno();
-		
+
 		habilitarCorpo = false;
 		modoAlteracao = false;
 		modoInsercao = false;
-		
+
 	}
 
 	public List<Aluno> getAlunos() {
 		return servico.getAlunos();
 	}
-	
-	public void consultar(){
-		if(Util.validarCPF(aluno.getCpf().replaceAll("[^0-9]", ""))){
+
+	public void consultar() {
+		if (Util.validarCPF(aluno.getCpf().replaceAll("[^0-9]", ""))) {
 			Aluno consulta = servico.getById(aluno);
 			habilitarCorpo = true;
-			if(consulta != null){
+			if (consulta != null) {
 				aluno = consulta;
 				modoAlteracao = true;
 				modoInsercao = false;
-			}else{
+			} else {
 				modoAlteracao = false;
 				modoInsercao = true;
 			}
+		} else {
+			Util.addErro("CPF Inválido", "Por favor, digite um CPF válido.");
 		}
 	}
-	
-	public void cancelar(){
+
+	public void cancelar() {
 		aluno = new Aluno();
 		modoAlteracao = false;
 		modoInsercao = false;

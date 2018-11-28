@@ -1,5 +1,6 @@
 package fatec.pweb.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -7,8 +8,9 @@ import javax.persistence.Query;
 import fatec.pweb.dao.AlunoDAO;
 import fatec.pweb.model.Aluno;
 
-public class AlunoService {
+public class AlunoService implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	AlunoDAO alunoDAO = new AlunoDAO();
 
 	public Aluno salvar(Aluno aluno) {
@@ -21,8 +23,8 @@ public class AlunoService {
 		alunoDAO.remove(aluno);
 		alunoDAO.closeEntityManager();
 	}
-	
-	public Aluno getById(Aluno aluno){
+
+	public Aluno getById(Aluno aluno) {
 		aluno = alunoDAO.getById(Aluno.class, aluno.getCpf());
 		alunoDAO.closeEntityManager();
 		return aluno;

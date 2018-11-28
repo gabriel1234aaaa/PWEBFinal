@@ -1,5 +1,6 @@
 package fatec.pweb.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.persistence.DiscriminatorValue;
@@ -8,8 +9,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("I")
-public class Instrutor extends Pessoa {
+public class Instrutor extends Pessoa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String formacao;
 	private String areaAtuacao;
 	@OneToMany(mappedBy = "instrutor")

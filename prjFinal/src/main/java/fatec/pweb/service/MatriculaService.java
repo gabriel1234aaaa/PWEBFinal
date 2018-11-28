@@ -1,11 +1,14 @@
 package fatec.pweb.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import fatec.pweb.dao.MatriculaDAO;
 import fatec.pweb.model.Matricula;
 
-public class MatriculaService {
+public class MatriculaService implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	MatriculaDAO matriculaDAO = new MatriculaDAO();
 
 	public Matricula salvar(Matricula matricula) {

@@ -1,5 +1,7 @@
 package fatec.pweb.model;
 
+import java.io.Serializable;
+
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
@@ -10,8 +12,9 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "tipoPessoa", discriminatorType = DiscriminatorType.CHAR, columnDefinition = "CHAR(1)")
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String cpf;
 	private String nome;

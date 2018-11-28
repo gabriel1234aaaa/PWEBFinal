@@ -5,4 +5,6 @@ import fatec.pweb.model.Aluno;
 
 public class AlunoDAO extends ImplDAO<Aluno, String>{
 
+	private static final long serialVersionUID = 1L;
+
 }

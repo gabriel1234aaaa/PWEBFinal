@@ -16,29 +16,32 @@
 			<h:panelGrid columns="4" cellpadding="5">
 				<p:outputLabel for="txtCpf" value="CPF" />
 				<p:inputMask id="txtCpf" value="#{alunoMB.aluno.cpf}"
-					mask="999.999.999-99" disabled="#{alunoMB.habilitarCorpo}" />
+					mask="999.999.999-99" disabled="#{alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel value="" />
 				<p:outputLabel value="" />
 
 				<p:outputLabel for="txtNome" value="Nome" />
 				<p:inputText id="txtNome" value="#{alunoMB.aluno.nome}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtNascimento" value="Data de Nascimento" />
 				<p:inputMask id="txtNascimento" value="#{alunoMB.aluno.dataNasc}"
-					mask="99/99/9999" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="99/99/9999" disabled="#{not alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="cbxSexo" value="Sexo" />
 				<h:selectOneMenu disabled="#{not alunoMB.habilitarCorpo}"
-					value="#{alunoMB.aluno.sexo}" id="cbxSexo">
+					value="#{alunoMB.aluno.sexo}" id="cbxSexo" required="true">
 					<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
 					<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
 				</h:selectOneMenu>
 
 				<p:outputLabel for="cbxEstCivil" value="Estado Civil" />
 				<h:selectOneMenu disabled="#{not alunoMB.habilitarCorpo}"
-					value="#{alunoMB.aluno.estadoCivil}" id="cbxEstCivil">
+					value="#{alunoMB.aluno.estadoCivil}" id="cbxEstCivil"
+					required="true">
 					<f:selectItem itemValue="Solteiro" itemLabel="Solteiro" />
 					<f:selectItem itemValue="Casado" itemLabel="Casado" />
 					<f:selectItem itemValue="Divorciado" itemLabel="Divorciado" />
@@ -46,7 +49,8 @@
 
 				<p:outputLabel for="cbxEscolaridade" value="Escolaridade" />
 				<h:selectOneMenu disabled="#{not alunoMB.habilitarCorpo}"
-					value="#{alunoMB.aluno.escolaridade}" id="cbxEscolaridade">
+					value="#{alunoMB.aluno.escolaridade}" id="cbxEscolaridade"
+					required="true">
 					<f:selectItem itemValue="Ensino Médio Cursando"
 						itemLabel="Ensino Médio Cursando" />
 					<f:selectItem itemValue="Ensino Médio Completo"
@@ -62,27 +66,28 @@
 
 				<p:outputLabel for="txtEndereco" value="Endereço" />
 				<p:inputText id="txtEndereco" value="#{alunoMB.aluno.endereco}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtNumero" value="Número" />
 				<p:inputText id="txtNumero" value="#{alunoMB.aluno.numero}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtBairro" value="Bairro" />
 				<p:inputText id="txtBairro" value="#{alunoMB.aluno.bairro}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtCep" value="CEP" />
 				<p:inputMask id="txtCep" value="#{alunoMB.aluno.cep}"
-					mask="99999-999" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="99999-999" disabled="#{not alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtCidade" value="Cidade" />
 				<p:inputText id="txtCidade" value="#{alunoMB.aluno.cidade}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="cbxEstado" value="Estado" />
 				<h:selectOneMenu disabled="#{not alunoMB.habilitarCorpo}"
-					value="#{alunoMB.aluno.estado}" id="cbxEstado">
+					value="#{alunoMB.aluno.estado}" id="cbxEstado" required="true">
 					<f:selectItem itemValue="AC" itemLabel="AC" />
 					<f:selectItem itemValue="AL" itemLabel="AL" />
 					<f:selectItem itemValue="AP" itemLabel="AP" />
@@ -115,19 +120,22 @@
 
 				<p:outputLabel for="txtTelefone" value="Telefone" />
 				<p:inputMask id="txtTelefone" value="#{alunoMB.aluno.telefone}"
-					mask="(99) 9999-9999" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="(99) 9999-9999" disabled="#{not alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtRG" value="RG" />
 				<p:inputMask id="txtRG" value="#{alunoMB.aluno.rg}"
-					mask="99.999.999-9" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="99.999.999-9" disabled="#{not alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtCelular" value="Celular" />
 				<p:inputMask id="txtCelular" value="#{alunoMB.aluno.celular}"
-					mask="(99) 9999-9999*" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="(99) 9999-9999*" disabled="#{not alunoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtEmail" value="Email" />
 				<p:inputText id="txtEmail" value="#{alunoMB.aluno.email}"
-					disabled="#{not alunoMB.habilitarCorpo}" />
+					disabled="#{not alunoMB.habilitarCorpo}" required="true" />
 			</h:panelGrid>
 
 			<p:commandButton value="Consultar"
@@ -150,10 +158,10 @@
 				action="#{alunoMB.remover}" styleClass="ui-priority-primary"
 				icon="fa fa-close">
 				<p:confirm header="Confirmar Exclusão"
-					message="Você tem certeza que deseja deletar o aluno?"
+					message="Você tem certeza que deseja excluir o aluno?"
 					icon="fa fa-exclamation-triangle" />
 			</p:commandButton>
-			
+
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="Sim" type="button"
 					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
@@ -164,7 +172,7 @@
 			<p:commandButton value="Cancelar" id="btnCancelar"
 				disabled="#{not alunoMB.habilitarCorpo}" update=":formAluno"
 				action="#{alunoMB.cancelar}" styleClass="ui-priority-primary"
-				icon="fa fa-ban" />
+				icon="fa fa-ban" immediate="true" />
 
 		</h:form>
 	</ui:define>

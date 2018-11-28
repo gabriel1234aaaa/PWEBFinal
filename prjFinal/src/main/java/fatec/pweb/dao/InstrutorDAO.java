@@ -5,4 +5,6 @@ import fatec.pweb.model.Instrutor;
 
 public class InstrutorDAO extends ImplDAO<Instrutor, String>{
 
+	private static final long serialVersionUID = 1L;
+
 }

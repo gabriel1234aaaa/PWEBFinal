@@ -1,11 +1,14 @@
 package fatec.pweb.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import fatec.pweb.dao.TurmaDAO;
 import fatec.pweb.model.Turma;
 
-public class TurmaService {
+public class TurmaService implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	TurmaDAO turmaDAO = new TurmaDAO();
 
 	public Turma salvar(Turma turma) {

@@ -8,7 +8,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 
-public abstract class ImplDAO <T,I extends Serializable>{
+public abstract class ImplDAO <T,I extends Serializable> implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	private static EntityManagerFactory emf;
 	private EntityManager em;
 

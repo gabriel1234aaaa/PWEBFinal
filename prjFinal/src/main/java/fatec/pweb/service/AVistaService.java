@@ -1,5 +1,9 @@
 package fatec.pweb.service;
 
-public class AVistaService {
+import java.io.Serializable;
+
+public class AVistaService implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 }
