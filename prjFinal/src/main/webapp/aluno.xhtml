@@ -12,6 +12,7 @@
 
 	<ui:define name="principal">
 		<h:form id="formAluno">
+			<p:growl id="message" showDetail="true" />
 			<h:panelGrid columns="4" cellpadding="5">
 				<p:outputLabel for="txtCpf" value="CPF" />
 				<p:inputMask id="txtCpf" value="#{alunoMB.aluno.cpf}"
@@ -114,16 +115,15 @@
 
 				<p:outputLabel for="txtTelefone" value="Telefone" />
 				<p:inputMask id="txtTelefone" value="#{alunoMB.aluno.telefone}"
-					mask="(99) 9999-9999?" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="(99) 9999-9999" disabled="#{not alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtRG" value="RG" />
 				<p:inputMask id="txtRG" value="#{alunoMB.aluno.rg}"
 					mask="99.999.999-9" disabled="#{not alunoMB.habilitarCorpo}" />
 
-
 				<p:outputLabel for="txtCelular" value="Celular" />
 				<p:inputMask id="txtCelular" value="#{alunoMB.aluno.celular}"
-					mask="(99) 9999-9999?" disabled="#{not alunoMB.habilitarCorpo}" />
+					mask="(99) 9999-9999*" disabled="#{not alunoMB.habilitarCorpo}" />
 
 				<p:outputLabel for="txtEmail" value="Email" />
 				<p:inputText id="txtEmail" value="#{alunoMB.aluno.email}"
@@ -133,28 +133,38 @@
 			<p:commandButton value="Consultar"
 				disabled="#{alunoMB.habilitarCorpo}" update=":formAluno"
 				action="#{alunoMB.consultar}" id="btnConsultar"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+				styleClass="ui-priority-primary" icon="fa fa-search" />
 
 			<p:commandButton value="Inserir" id="btnInserir"
 				disabled="#{not alunoMB.modoInsercao}" update=":formAluno"
-				action="#{alunoMB.salvar}"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
-
+				action="#{alunoMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-check" />
 
 			<p:commandButton value="Alterar" id="btnAlterar"
 				disabled="#{not alunoMB.modoAlteracao}" update=":formAluno"
-				action="#{alunoMB.salvar}"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
-
+				action="#{alunoMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-edit" />
 
 			<p:commandButton value="Excluir" id="btnExcluir"
-				disabled="#{not alunoMB.modoAlteracao}" update=":formAluno"
-				action="#{alunoMB.remover}"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+				disabled="#{not alunoMB.modoAlteracao}" update=":formAluno message"
+				action="#{alunoMB.remover}" styleClass="ui-priority-primary"
+				icon="fa fa-close">
+				<p:confirm header="Confirmar Exclusão"
+					message="Você tem certeza que deseja deletar o aluno?"
+					icon="fa fa-exclamation-triangle" />
+			</p:commandButton>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-close" />
+			</p:confirmDialog>
 
-
-			<p:commandButton value="Sair" id="btnSair"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+			<p:commandButton value="Cancelar" id="btnCancelar"
+				disabled="#{not alunoMB.habilitarCorpo}" update=":formAluno"
+				action="#{alunoMB.cancelar}" styleClass="ui-priority-primary"
+				icon="fa fa-ban" />
 
 		</h:form>
 	</ui:define>

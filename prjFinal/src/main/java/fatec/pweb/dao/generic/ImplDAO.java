@@ -32,7 +32,6 @@ public abstract class ImplDAO <T,I extends Serializable>{
 	public void remove(T entity) {
 		getEntityManager().getTransaction().begin();
 		T merged = getEntityManager().merge(entity);
-		System.out.println(merged);
 		getEntityManager().remove(merged);
 		getEntityManager().getTransaction().commit();
 
