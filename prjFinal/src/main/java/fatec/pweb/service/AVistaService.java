@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import fatec.pweb.dao.AVistaDAO;
-import fatec.pweb.model.APrazo;
 import fatec.pweb.model.AVista;
 
 public class AVistaService implements Serializable {
