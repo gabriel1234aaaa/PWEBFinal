@@ -9,7 +9,7 @@ import fatec.pweb.model.APrazo;
 public class APrazoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	APrazoDAO aPrazoDAO = new APrazoDAO();
+	private APrazoDAO aPrazoDAO = new APrazoDAO();
 
 	public APrazo salvar(APrazo aPrazo) {
 		aPrazo = aPrazoDAO.save(aPrazo);
@@ -24,13 +24,7 @@ public class APrazoService implements Serializable {
 		return list;
 	}
 
-	public void alterar(APrazo aPrazo) {
-		aPrazoDAO.save(aPrazo);
-		aPrazoDAO.closeEntityManager();
-	}
-
 	public void remover(APrazo aPrazo) {
-
 		aPrazo = aPrazoDAO.getById(APrazo.class, aPrazo.getCodigo());
 		aPrazoDAO.remove(aPrazo);
 		aPrazoDAO.closeEntityManager();

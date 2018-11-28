@@ -11,7 +11,7 @@ import fatec.pweb.model.Aluno;
 public class AlunoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	AlunoDAO alunoDAO = new AlunoDAO();
+	private AlunoDAO alunoDAO = new AlunoDAO();
 
 	public Aluno salvar(Aluno aluno) {
 		aluno = alunoDAO.save(aluno);

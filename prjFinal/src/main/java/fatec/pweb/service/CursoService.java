@@ -11,7 +11,7 @@ import fatec.pweb.model.Curso;
 public class CursoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	CursoDAO cursoDAO = new CursoDAO();
+	private CursoDAO cursoDAO = new CursoDAO();
 
 	public Curso salvar(Curso curso) {
 		curso = cursoDAO.save(curso);
@@ -24,11 +24,6 @@ public class CursoService implements Serializable {
 		List<Curso> list = cursoDAO.getAll(Curso.class);
 		cursoDAO.closeEntityManager();
 		return list;
-	}
-
-	public void alterar(Curso curso) {
-		cursoDAO.save(curso);
-		cursoDAO.closeEntityManager();
 	}
 
 	public void remover(Curso curso) {

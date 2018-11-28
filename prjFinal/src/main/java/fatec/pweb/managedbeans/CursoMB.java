@@ -18,26 +18,28 @@ public class CursoMB {
 	boolean modoInsercao = false;
 	boolean modoAlteracao = false;
 
-	/*private Curso formToObject() {
-		String cpf = txtCPF.getText().replaceAll("[^0-9]", "");
-		Aluno aluno = new Aluno(txtNome.getText(), cpf);
-		aluno.setDataNasc(txtDataNascto.getText().replaceAll("[^0-9]", ""));
-		aluno.setSexo(cmbSexo.getSelectedItem().equals("Feminino") ? "F" : "M");
-		aluno.setEstadoCivil(cmbEstadoCivil.getSelectedItem().toString().replace("(a)", ""));
-		aluno.setEscolaridade(cmbEscolaridade.getSelectedItem().toString());
-		aluno.setEndereco(txtEndereco.getText());
-		aluno.setNumero(Integer.parseInt(txtN.getText()));
-		aluno.setBairro(txtBairro.getText());
-		aluno.setCEP(txtCEP.getText().replaceAll("[^0-9]", ""));
-		aluno.setCidade(txtCidade.getText());
-		aluno.setEstado(cmbEstado.getSelectedItem().toString());
-		aluno.setTelefone(txtTelRes.getText().replaceAll("[^0-9]", ""));
-		aluno.setRG(txtRG.getText().replaceAll("[^0-9]", ""));
-		aluno.setCelular(txtCelular.getText().replaceAll("[^0-9]", ""));
-		aluno.setEmail(txtEmail.getText());
-
-		return aluno;
-	}*/
+	/*
+	 * private Curso formToObject() { String cpf =
+	 * txtCPF.getText().replaceAll("[^0-9]", ""); Aluno aluno = new
+	 * Aluno(txtNome.getText(), cpf);
+	 * aluno.setDataNasc(txtDataNascto.getText().replaceAll("[^0-9]", ""));
+	 * aluno.setSexo(cmbSexo.getSelectedItem().equals("Feminino") ? "F" : "M");
+	 * aluno.setEstadoCivil(cmbEstadoCivil.getSelectedItem().toString().replace(
+	 * "(a)", ""));
+	 * aluno.setEscolaridade(cmbEscolaridade.getSelectedItem().toString());
+	 * aluno.setEndereco(txtEndereco.getText());
+	 * aluno.setNumero(Integer.parseInt(txtN.getText()));
+	 * aluno.setBairro(txtBairro.getText());
+	 * aluno.setCEP(txtCEP.getText().replaceAll("[^0-9]", ""));
+	 * aluno.setCidade(txtCidade.getText());
+	 * aluno.setEstado(cmbEstado.getSelectedItem().toString());
+	 * aluno.setTelefone(txtTelRes.getText().replaceAll("[^0-9]", ""));
+	 * aluno.setRG(txtRG.getText().replaceAll("[^0-9]", ""));
+	 * aluno.setCelular(txtCelular.getText().replaceAll("[^0-9]", ""));
+	 * aluno.setEmail(txtEmail.getText());
+	 * 
+	 * return aluno; }
+	 */
 
 	public Curso getCurso() {
 		return curso;
@@ -55,8 +57,6 @@ public class CursoMB {
 		this.habilitarCorpo = habilitarCorpo;
 	}
 
-	
-	
 	public boolean isModoInsercao() {
 		return modoInsercao;
 	}
@@ -101,17 +101,16 @@ public class CursoMB {
 		modoAlteracao = true;
 		if (consulta != null) {
 			curso = consulta;
-			
+
 		}
 	}
 
 	public void inserir() {
-	
+
 	}
-	
+
 	public void alterar() {
-		
+
 	}
-	
-	
+
 }

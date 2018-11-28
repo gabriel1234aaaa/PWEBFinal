@@ -9,7 +9,7 @@ import fatec.pweb.model.Turma;
 public class TurmaService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	TurmaDAO turmaDAO = new TurmaDAO();
+	private TurmaDAO turmaDAO = new TurmaDAO();
 
 	public Turma salvar(Turma turma) {
 		turma = turmaDAO.save(turma);
@@ -22,11 +22,6 @@ public class TurmaService implements Serializable {
 		List<Turma> list = turmaDAO.getAll(Turma.class);
 		turmaDAO.closeEntityManager();
 		return list;
-	}
-
-	public void alterar(Turma turma) {
-		turmaDAO.save(turma);
-		turmaDAO.closeEntityManager();
 	}
 
 	public void remover(Turma turma) {
