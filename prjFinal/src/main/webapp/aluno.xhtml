@@ -13,6 +13,7 @@
 	<ui:define name="principal">
 		<h:form id="formAluno">
 			<p:growl id="message" showDetail="true" />
+			<p:focus for="#{alunoMB.focus}" />
 			<h:panelGrid columns="4" cellpadding="5">
 				<p:outputLabel for="txtCpf" value="CPF" />
 				<p:inputMask id="txtCpf" value="#{alunoMB.aluno.cpf}"
@@ -169,10 +170,9 @@
 					styleClass="ui-confirmdialog-no" icon="fa fa-close" />
 			</p:confirmDialog>
 
-			<p:commandButton value="Cancelar" id="btnCancelar"
-				disabled="#{not alunoMB.habilitarCorpo}" update=":formAluno"
-				action="#{alunoMB.cancelar}" styleClass="ui-priority-primary"
-				icon="fa fa-ban" immediate="true" />
+			<p:button value="Cancelar" id="btnCancelar"
+				disabled="#{not alunoMB.habilitarCorpo}"
+				styleClass="ui-priority-primary" icon="fa fa-ban" type="reset" />
 
 		</h:form>
 	</ui:define>

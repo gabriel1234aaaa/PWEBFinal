@@ -12,60 +12,78 @@
 
 	<ui:define name="principal">
 		<h:form id="formCurso">
+			<p:growl id="message" showDetail="true" />
+			<p:focus for="#{cursoMB.focus}" />
 			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="txtSiglaCurso" value="Sigla curso " />
+				<p:outputLabel for="txtSiglaCurso" value="Sigla curso" />
 				<p:inputText id="txtSiglaCurso" value="#{cursoMB.curso.sigla}"
-					disabled="#{cursoMB.habilitarCorpo}" />
+					disabled="#{cursoMB.habilitarCorpo}" required="true" />
 
-				<p:outputLabel for="txtNomeCurso" value="Nome curso " />
+				<p:outputLabel for="txtNomeCurso" value="Nome curso" />
 				<p:inputText id="txtNomeCurso" value="#{cursoMB.curso.nome}"
-					disabled="#{not cursoMB.habilitarCorpo}" />
+					disabled="#{not cursoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtCargaHor" value="Carga horária" />
 				<p:inputText id="txtCargaHor" value="#{cursoMB.curso.cargaHoraria}"
-					disabled="#{not cursoMB.habilitarCorpo}" />
+					disabled="#{not cursoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtValCurso" value="Valor curso" />
 				<p:inputText id="txtValCurso" value="#{cursoMB.curso.valor}"
-					disabled="#{not cursoMB.habilitarCorpo}" />
+					disabled="#{not cursoMB.habilitarCorpo}" required="true">
+					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+				</p:inputText>
 
 				<p:outputLabel for="txtProgCurso" value="Programa curso" />
 				<p:inputText id="txtProgCurso" value="#{cursoMB.curso.programa}"
-					disabled="#{not cursoMB.habilitarCorpo}" />
+					disabled="#{not cursoMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtDataVig" value="Data de Vigência" />
 				<p:inputMask id="txtDataVig" value="#{cursoMB.curso.dataVigencia}"
-					mask="99/99/9999" disabled="#{not cursoMB.habilitarCorpo}" />
+					mask="99/99/9999" disabled="#{not cursoMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtValHoraInst" value="Valor hora instrutor" />
 				<p:inputText id="txtValHoraInst"
 					value="#{cursoMB.curso.valorHoraInstrutor}"
-					disabled="#{not cursoMB.habilitarCorpo}" />
-
+					disabled="#{not cursoMB.habilitarCorpo}" required="true">
+					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+				</p:inputText>
 			</h:panelGrid>
 
 			<p:commandButton value="Consultar"
 				disabled="#{cursoMB.habilitarCorpo}" update=":formCurso"
 				action="#{cursoMB.consultar}" id="btnConsultar"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+				styleClass="ui-priority-primary" icon="fa fa-search" />
 
+			<p:commandButton value="Inserir" id="btnInserir"
+				disabled="#{not cursoMB.modoInsercao}" update=":formCurso"
+				action="#{cursoMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-check" />
 
-			<p:commandButton value="Inserir" disabled="#{not cursoMB.modoInsercao}"
-				update=":formCurso" action="#{cursoMB.inserir}" id="btnInserir"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
-
-
-			<p:commandButton value="Alterar" disabled="#{not cursoMB.modoAlteracao}"
-				update=":formCurso" action="#{cursoMB.alterar}" id="btnAlterar"
-				styleClass="ui-priority-primary" icon="ui-icon-disk"  />
-
+			<p:commandButton value="Alterar" id="btnAlterar"
+				disabled="#{not cursoMB.modoAlteracao}" update=":formCurso"
+				action="#{cursoMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-edit" />
 
 			<p:commandButton value="Excluir" id="btnExcluir"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+				disabled="#{not cursoMB.modoAlteracao}" update=":formCurso message"
+				action="#{cursoMB.remover}" styleClass="ui-priority-primary"
+				icon="fa fa-close">
+				<p:confirm header="Confirmar Exclusão"
+					message="Você tem certeza que deseja excluir o curso?"
+					icon="fa fa-exclamation-triangle" />
+			</p:commandButton>
 
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-close" />
+			</p:confirmDialog>
 
-			<p:commandButton value="Sair" id="btnSair"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+			<p:button value="Cancelar" id="btnCancelar"
+				disabled="#{not cursoMB.habilitarCorpo}"
+				styleClass="ui-priority-primary" icon="fa fa-ban" type="reset" />
 
 		</h:form>
 	</ui:define>

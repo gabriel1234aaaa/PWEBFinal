@@ -1,5 +1,6 @@
 package fatec.pweb.managedbeans;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -7,39 +8,19 @@ import javax.faces.bean.ViewScoped;
 
 import fatec.pweb.model.Curso;
 import fatec.pweb.service.CursoService;
+import fatec.pweb.util.Util;
 
 @ManagedBean
 @ViewScoped
-public class CursoMB {
-	Curso curso = new Curso();
-	CursoService servico = new CursoService();
-	List<Curso> cursos;
-	boolean habilitarCorpo = false;
-	boolean modoInsercao = false;
-	boolean modoAlteracao = false;
+public class CursoMB implements Serializable {
 
-	/*
-	 * private Curso formToObject() { String cpf =
-	 * txtCPF.getText().replaceAll("[^0-9]", ""); Aluno aluno = new
-	 * Aluno(txtNome.getText(), cpf);
-	 * aluno.setDataNasc(txtDataNascto.getText().replaceAll("[^0-9]", ""));
-	 * aluno.setSexo(cmbSexo.getSelectedItem().equals("Feminino") ? "F" : "M");
-	 * aluno.setEstadoCivil(cmbEstadoCivil.getSelectedItem().toString().replace(
-	 * "(a)", ""));
-	 * aluno.setEscolaridade(cmbEscolaridade.getSelectedItem().toString());
-	 * aluno.setEndereco(txtEndereco.getText());
-	 * aluno.setNumero(Integer.parseInt(txtN.getText()));
-	 * aluno.setBairro(txtBairro.getText());
-	 * aluno.setCEP(txtCEP.getText().replaceAll("[^0-9]", ""));
-	 * aluno.setCidade(txtCidade.getText());
-	 * aluno.setEstado(cmbEstado.getSelectedItem().toString());
-	 * aluno.setTelefone(txtTelRes.getText().replaceAll("[^0-9]", ""));
-	 * aluno.setRG(txtRG.getText().replaceAll("[^0-9]", ""));
-	 * aluno.setCelular(txtCelular.getText().replaceAll("[^0-9]", ""));
-	 * aluno.setEmail(txtEmail.getText());
-	 * 
-	 * return aluno; }
-	 */
+	private static final long serialVersionUID = 1L;
+	private Curso curso = new Curso();
+	private CursoService servico = new CursoService();
+	private boolean habilitarCorpo = false;
+	private boolean modoInsercao = false;
+	private boolean modoAlteracao = false;
+	private String focus = "txtSiglaCurso";
 
 	public Curso getCurso() {
 		return curso;
@@ -73,44 +54,57 @@ public class CursoMB {
 		this.modoAlteracao = modoAlteracao;
 	}
 
-	public void salvar() {
-		curso = servico.salvar(curso);
-		if (cursos != null) {
-			cursos.add(curso);
-		}
-		curso = new Curso();
+	public String getFocus() {
+		return focus;
 	}
 
-	public void remover(Curso curso) {
-		servico.remover(curso);
-		cursos.remove(curso);
+	public void setFocus(String focus) {
+		this.focus = focus;
 	}
 
 	public List<Curso> getCursos() {
-		if (cursos == null) {
-			cursos = servico.getCursos();
+		return servico.getCursos();
+	}
+
+	public void salvar() {
+		curso = servico.salvar(curso);
+		if (modoInsercao) {
+			Util.addInfo("Inserção", "O curso foi inserido com sucesso!");
+		} else {
+			Util.addInfo("Alteração", "O curso foi alterado com sucesso!");
 		}
 
-		return cursos;
+		curso = new Curso();
+
+		habilitarCorpo = false;
+		modoAlteracao = false;
+		modoInsercao = false;
+		focus = "txtSiglaCurso";
+	}
+
+	public void remover() {
+		servico.remover(curso);
+		Util.addInfo("Exclusão", "O curso foi excluído com sucesso!");
+		curso = new Curso();
+
+		habilitarCorpo = false;
+		modoAlteracao = false;
+		modoInsercao = false;
+		focus = "txtSiglaCurso";
 	}
 
 	public void consultar() {
 		Curso consulta = servico.getById(curso);
 		habilitarCorpo = true;
-		modoInsercao = true;
-		modoAlteracao = true;
 		if (consulta != null) {
 			curso = consulta;
-
+			modoAlteracao = true;
+			modoInsercao = false;
+		} else {
+			modoAlteracao = false;
+			modoInsercao = true;
 		}
-	}
-
-	public void inserir() {
-
-	}
-
-	public void alterar() {
-
+		focus = "txtNomeCurso";
 	}
 
 }

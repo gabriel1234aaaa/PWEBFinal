@@ -32,8 +32,14 @@ public class InstrutorService implements Serializable {
 	}
 
 	public Instrutor getInstrutorByNome(String nome) {
-		Query query = instrutorDAO.getEntityManager().createQuery("SELECT o FROM Instrutor WHERE o.nome = :nome");
+		Query query = instrutorDAO.getEntityManager().createQuery("SELECT o FROM Instrutor o WHERE o.nome = :nome");
 		query.setParameter("nome", nome);
 		return (Instrutor) query.getSingleResult();
+	}
+	
+	public Instrutor getById(Instrutor instrutor) {
+		instrutor = instrutorDAO.getById(Instrutor.class, instrutor.getCpf());
+		instrutorDAO.closeEntityManager();
+		return instrutor;
 	}
 }

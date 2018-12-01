@@ -31,4 +31,29 @@ public class Aluno extends Pessoa implements Serializable {
 		this.matricula = matricula;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Aluno other = (Aluno) obj;
+		if (getNome() == null) {
+			if (other.getNome() != null)
+				return false;
+		} else if (!getNome().equals(other.getNome()))
+			return false;
+		return true;
+	}
+
 }

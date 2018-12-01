@@ -15,7 +15,7 @@ public class Turma implements Serializable {
 	@Id
 	private String siglaTurma;
 	private String descricao;
-	private String datainicio;
+	private String dataInicio;
 	private String dataTermino;
 	private String periodo;
 	private int qtdeVagas;
@@ -51,12 +51,12 @@ public class Turma implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public String getDatainicio() {
-		return datainicio;
+	public String getDataInicio() {
+		return dataInicio;
 	}
 
-	public void setDatainicio(String datainicio) {
-		this.datainicio = datainicio;
+	public void setDataInicio(String dataInicio) {
+		this.dataInicio = dataInicio;
 	}
 
 	public String getDataTermino() {
@@ -113,6 +113,31 @@ public class Turma implements Serializable {
 
 	public void setMatriculas(ArrayList<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((siglaTurma == null) ? 0 : siglaTurma.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Turma other = (Turma) obj;
+		if (siglaTurma == null) {
+			if (other.siglaTurma != null)
+				return false;
+		} else if (!siglaTurma.equals(other.siglaTurma))
+			return false;
+		return true;
 	}
 
 }

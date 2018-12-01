@@ -6,28 +6,28 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import fatec.pweb.model.Aluno;
-import fatec.pweb.service.AlunoService;
+import fatec.pweb.model.Instrutor;
+import fatec.pweb.service.InstrutorService;
 import fatec.pweb.util.Util;
 
 @ManagedBean
 @ViewScoped
-public class AlunoMB implements Serializable {
+public class InstrutorMB implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private Aluno aluno = new Aluno();
-	private AlunoService servico = new AlunoService();
+	private Instrutor instrutor = new Instrutor();
+	private InstrutorService servico = new InstrutorService();
 	private boolean habilitarCorpo = false;
 	private boolean modoInsercao = false;
 	private boolean modoAlteracao = false;
 	private String focus = "txtCpf";
 
-	public Aluno getAluno() {
-		return aluno;
+	public Instrutor getInstrutor() {
+		return instrutor;
 	}
 
-	public void setAluno(Aluno aluno) {
-		this.aluno = aluno;
+	public void setInstrutor(Instrutor instrutor) {
+		this.instrutor = instrutor;
 	}
 
 	public boolean isHabilitarCorpo() {
@@ -62,19 +62,19 @@ public class AlunoMB implements Serializable {
 		this.focus = focus;
 	}
 
-	public List<Aluno> getAlunos() {
-		return servico.getAlunos();
+	public List<Instrutor> getInstrutors() {
+		return servico.getInstrutores();
 	}
 
 	public void salvar() {
-		aluno = servico.salvar(aluno);
+		instrutor = servico.salvar(instrutor);
 		if (modoInsercao) {
-			Util.addInfo("Inserção", "O aluno foi inserido com sucesso!");
+			Util.addInfo("Inserção", "O instrutor foi inserido com sucesso!");
 		} else {
-			Util.addInfo("Alteração", "O aluno foi alterado com sucesso!");
+			Util.addInfo("Alteração", "O instrutor foi alterado com sucesso!");
 		}
 
-		aluno = new Aluno();
+		instrutor = new Instrutor();
 
 		habilitarCorpo = false;
 		modoAlteracao = false;
@@ -83,9 +83,9 @@ public class AlunoMB implements Serializable {
 	}
 
 	public void remover() {
-		servico.remover(aluno);
-		Util.addInfo("Exclusão", "O aluno foi excluído com sucesso!");
-		aluno = new Aluno();
+		servico.remover(instrutor);
+		Util.addInfo("Exclusão", "O instrutor foi excluído com sucesso!");
+		instrutor = new Instrutor();
 
 		habilitarCorpo = false;
 		modoAlteracao = false;
@@ -94,19 +94,15 @@ public class AlunoMB implements Serializable {
 	}
 
 	public void consultar() {
-		if (Util.validarCPF(aluno.getCpf().replaceAll("[^0-9]", ""))) {
-			Aluno consulta = servico.getById(aluno);
-			habilitarCorpo = true;
-			if (consulta != null) {
-				aluno = consulta;
-				modoAlteracao = true;
-				modoInsercao = false;
-			} else {
-				modoAlteracao = false;
-				modoInsercao = true;
-			}
+		Instrutor consulta = servico.getById(instrutor);
+		habilitarCorpo = true;
+		if (consulta != null) {
+			instrutor = consulta;
+			modoAlteracao = true;
+			modoInsercao = false;
 		} else {
-			Util.addErro("CPF Inválido", "Por favor, digite um CPF válido.");
+			modoAlteracao = false;
+			modoInsercao = true;
 		}
 		focus = "txtNome";
 	}

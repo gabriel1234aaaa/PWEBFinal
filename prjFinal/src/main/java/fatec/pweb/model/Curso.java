@@ -20,7 +20,7 @@ public class Curso implements Serializable {
 	private double valorHoraInstrutor;
 	private String programa;
 	@OneToMany(mappedBy = "curso")
-	ArrayList<Turma> turmas = new ArrayList<>();
+	private ArrayList<Turma> turmas = new ArrayList<>();
 
 	public Curso() {
 	}
@@ -92,6 +92,35 @@ public class Curso implements Serializable {
 
 	public void setTurmas(ArrayList<Turma> turmas) {
 		this.turmas = turmas;
+	}
+	
+	public void addTurma(Turma turma) {
+		turmas.add(turma);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Curso other = (Curso) obj;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 
 }

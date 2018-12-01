@@ -37,7 +37,7 @@ public class AlunoService implements Serializable {
 	}
 
 	public Aluno getAlunoByNome(String nome) {
-		Query query = alunoDAO.getEntityManager().createQuery("SELECT o FROM Aluno WHERE o.nome = :nome");
+		Query query = alunoDAO.getEntityManager().createQuery("SELECT o FROM Aluno o WHERE o.nome = :nome");
 		query.setParameter("nome", nome);
 		return (Aluno) query.getSingleResult();
 	}

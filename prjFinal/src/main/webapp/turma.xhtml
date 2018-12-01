@@ -11,58 +11,85 @@
 	</ui:define>
 
 	<ui:define name="principal">
-		<h:form>
+		<h:form id="formTurma">
+			<p:growl id="message" showDetail="true" />
+			<p:focus for="#{turmaMB.focus}" />
 			<h:panelGrid columns="2" cellpadding="5">
-				<p:outputLabel for="cbxCurso" value="Curso" />
-				<h:selectOneMenu disabled="true" id="cbxCurso">
-					<f:selectItem itemValue="1" itemLabel="Administração" />
-					<f:selectItem itemValue="2" itemLabel="Contabilidade" />
-				</h:selectOneMenu>
-
 				<p:outputLabel for="txtSigla" value="Sigla da Turma" />
-				<p:inputText id="txtSigla" disabled="true" />
+				<p:inputText id="txtSigla" value="#{turmaMB.turma.siglaTurma}"
+					disabled="#{turmaMB.habilitarCorpo}" required="true" />
 
-				<p:outputLabel for="txtNome" value="Nome" />
-				<p:inputText id="txtNome" disabled="true" />
+				<p:outputLabel for="cbxCurso" value="Curso" />
+				<p:selectOneMenu disabled="#{not turmaMB.habilitarCorpo}"
+					value="#{turmaMB.curso}" converter="converterCurso" id="cbxCurso">
+					<f:selectItems value="#{turmaMB.cursos}" var="aux"
+						itemValue="#{aux}" itemLabel="#{aux.nome}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="txtDescricao" value="Descrição da Turma" />
+				<p:inputText id="txtDescricao" value="#{turmaMB.turma.descricao}"
+					disabled="#{not turmaMB.habilitarCorpo}" required="true" />
 
 				<p:outputLabel for="txtQtdeVagas" value="Quantidade de Vagas" />
-				<p:inputText id="txtQtdeVagas" disabled="true" />
+				<p:inputText id="txtQtdeVagas" value="#{turmaMB.turma.qtdeVagas}"
+					disabled="#{not turmaMB.habilitarCorpo}" required="true">
+					<f:convertNumber minFractionDigits="0" maxFractionDigits="0" />
+				</p:inputText>
 
 				<p:outputLabel for="cbxPeriodo" value="Período" />
-				<h:selectOneMenu disabled="true" id="cbxPeriodo">
-					<f:selectItem itemValue="1" itemLabel="Manhã" />
-					<f:selectItem itemValue="2" itemLabel="Tarde" />
-					<f:selectItem itemValue="3" itemLabel="Noite" />
+				<h:selectOneMenu disabled="#{not turmaMB.habilitarCorpo}"
+					value="#{turmaMB.turma.periodo}" id="cbxPeriodo" required="true">
+					<f:selectItem itemValue="Manhã" itemLabel="Manhã" />
+					<f:selectItem itemValue="Tarde" itemLabel="Tarde" />
+					<f:selectItem itemValue="Noite" itemLabel="Noite" />
 				</h:selectOneMenu>
 
 				<p:outputLabel for="txtDataInicio" value="Data de Início" />
-				<p:inputMask id="txtDataInicio" value="#{maskView.date}"
-					mask="99/99/9999" disabled="true" />
+				<p:inputMask id="txtDataInicio" value="#{turmaMB.turma.dataInicio}"
+					mask="99/99/9999" disabled="#{not turmaMB.habilitarCorpo}"
+					required="true" />
 
 				<p:outputLabel for="txtDataTermino" value="Data de Término" />
-				<p:inputMask id="txtDataTermino" value="#{maskView.date}"
-					mask="99/99/9999" disabled="true" />
+				<p:inputMask id="txtDataTermino"
+					value="#{turmaMB.turma.dataTermino}" mask="99/99/9999"
+					disabled="#{not turmaMB.habilitarCorpo}" required="true" />
 
 			</h:panelGrid>
 
-			<p:commandButton value="Consultar" id="btnConsultar"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
-
+			<p:commandButton value="Consultar"
+				disabled="#{turmaMB.habilitarCorpo}" update=":formTurma formTurma:cbxCurso"
+				action="#{turmaMB.consultar}" id="btnConsultar"
+				styleClass="ui-priority-primary" icon="fa fa-search" />
 
 			<p:commandButton value="Inserir" id="btnInserir"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
-
+				disabled="#{not turmaMB.modoInsercao}" update=":formTurma"
+				action="#{turmaMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-check" />
 
 			<p:commandButton value="Alterar" id="btnAlterar"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
-
+				disabled="#{not turmaMB.modoAlteracao}" update=":formTurma"
+				action="#{turmaMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-edit" />
 
 			<p:commandButton value="Excluir" id="btnExcluir"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" disabled="true" />
+				disabled="#{not turmaMB.modoAlteracao}" update=":formTurma message"
+				action="#{turmaMB.remover}" styleClass="ui-priority-primary"
+				icon="fa fa-close">
+				<p:confirm header="Confirmar Exclusão"
+					message="Você tem certeza que deseja excluir a turma?"
+					icon="fa fa-exclamation-triangle" />
+			</p:commandButton>
 
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-close" />
+			</p:confirmDialog>
 
-			<p:commandButton value="Sair" id="btnSair"
-				styleClass="ui-priority-primary" icon="ui-icon-disk" />
+			<p:button value="Cancelar" id="btnCancelar"
+				disabled="#{not turmaMB.habilitarCorpo}"
+				styleClass="ui-priority-primary" icon="fa fa-ban" type="reset" />
 
 		</h:form>
 	</ui:define>

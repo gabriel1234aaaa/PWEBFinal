@@ -19,7 +19,7 @@ public class TurmaConverter implements Converter {
 		if (value != null && !value.equals("")) {
 			t = new Turma();
 			t.setSiglaTurma(value);
-			t = servico.getTurmaById(t);
+			t = servico.getById(t);
 		}
 		return t;
 	}

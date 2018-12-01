@@ -15,7 +15,7 @@ public class Instrutor extends Pessoa implements Serializable {
 	private String formacao;
 	private String areaAtuacao;
 	@OneToMany(mappedBy = "instrutor")
-	ArrayList<Turma> turmas = new ArrayList<>();
+	private ArrayList<Turma> turmas = new ArrayList<>();
 
 	public Instrutor() {
 	}
@@ -46,6 +46,35 @@ public class Instrutor extends Pessoa implements Serializable {
 
 	public void setTurmas(ArrayList<Turma> turmas) {
 		this.turmas = turmas;
+	}
+	
+	public void addTurma(Turma turma) {
+		turmas.add(turma);
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((getNome() == null) ? 0 : getNome().hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Instrutor other = (Instrutor) obj;
+		if (getNome() == null) {
+			if (other.getNome() != null)
+				return false;
+		} else if (!getNome().equals(other.getNome()))
+			return false;
+		return true;
 	}
 
 }

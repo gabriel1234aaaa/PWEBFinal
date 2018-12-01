@@ -3,8 +3,6 @@ package fatec.pweb.service;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import fatec.pweb.dao.CursoDAO;
 import fatec.pweb.model.Curso;
 
@@ -33,9 +31,7 @@ public class CursoService implements Serializable {
 	}
 
 	public Curso getCursoByNome(String nome) {
-		Query query = cursoDAO.getEntityManager().createQuery("SELECT o FROM Curso WHERE o.nome = :nome");
-		query.setParameter("nome", nome);
-		return (Curso) query.getSingleResult();
+		return cursoDAO.getEntityManager().createQuery("SELECT o FROM Curso o WHERE o.nome = '" + nome + "'", Curso.class).getSingleResult();
 	}
 
 	public Curso getById(Curso curso) {

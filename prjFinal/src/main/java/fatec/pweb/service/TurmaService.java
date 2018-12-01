@@ -30,7 +30,7 @@ public class TurmaService implements Serializable {
 		turmaDAO.closeEntityManager();
 	}
 
-	public Turma getTurmaById(Turma turma) {
+	public Turma getById(Turma turma) {
 		turma = turmaDAO.getById(Turma.class, turma.getSiglaTurma());
 		turmaDAO.closeEntityManager();
 		return turma;
