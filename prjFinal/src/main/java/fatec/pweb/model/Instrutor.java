@@ -47,11 +47,11 @@ public class Instrutor extends Pessoa implements Serializable {
 	public void setTurmas(ArrayList<Turma> turmas) {
 		this.turmas = turmas;
 	}
-	
+
 	public void addTurma(Turma turma) {
 		turmas.add(turma);
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

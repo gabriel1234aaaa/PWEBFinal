@@ -25,7 +25,7 @@ public class Turma implements Serializable {
 	@ManyToOne
 	private Curso curso;
 	@OneToMany(mappedBy = "turma")
-	ArrayList<Matricula> matriculas = new ArrayList<>();
+	private ArrayList<Matricula> matriculas = new ArrayList<>();
 
 	public Turma() {
 	}
@@ -113,6 +113,10 @@ public class Turma implements Serializable {
 
 	public void setMatriculas(ArrayList<Matricula> matriculas) {
 		this.matriculas = matriculas;
+	}
+
+	public void addMatricula(Matricula matricula) {
+		matriculas.add(matricula);
 	}
 
 	@Override

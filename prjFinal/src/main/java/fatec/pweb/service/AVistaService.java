@@ -10,7 +10,7 @@ public class AVistaService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private AVistaDAO aVistaDAO = new AVistaDAO();
-	
+
 	public AVista salvar(AVista aVista) {
 		aVista = aVistaDAO.save(aVista);
 		aVistaDAO.closeEntityManager();

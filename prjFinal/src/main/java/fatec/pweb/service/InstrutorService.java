@@ -3,8 +3,6 @@ package fatec.pweb.service;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Query;
-
 import fatec.pweb.dao.InstrutorDAO;
 import fatec.pweb.model.Instrutor;
 
@@ -32,11 +30,10 @@ public class InstrutorService implements Serializable {
 	}
 
 	public Instrutor getInstrutorByNome(String nome) {
-		Query query = instrutorDAO.getEntityManager().createQuery("SELECT o FROM Instrutor o WHERE o.nome = :nome");
-		query.setParameter("nome", nome);
-		return (Instrutor) query.getSingleResult();
+		return instrutorDAO.getEntityManager()
+				.createQuery("SELECT o FROM Instrutor o WHERE o.nome = '" + nome + "'", Instrutor.class).getSingleResult();
 	}
-	
+
 	public Instrutor getById(Instrutor instrutor) {
 		instrutor = instrutorDAO.getById(Instrutor.class, instrutor.getCpf());
 		instrutorDAO.closeEntityManager();

@@ -31,7 +31,8 @@ public class CursoService implements Serializable {
 	}
 
 	public Curso getCursoByNome(String nome) {
-		return cursoDAO.getEntityManager().createQuery("SELECT o FROM Curso o WHERE o.nome = '" + nome + "'", Curso.class).getSingleResult();
+		return cursoDAO.getEntityManager()
+				.createQuery("SELECT o FROM Curso o WHERE o.nome = '" + nome + "'", Curso.class).getSingleResult();
 	}
 
 	public Curso getById(Curso curso) {

@@ -15,7 +15,6 @@ public class TurmaService implements Serializable {
 		turma = turmaDAO.save(turma);
 		turmaDAO.closeEntityManager();
 		return turma;
-
 	}
 
 	public List<Turma> getTurmas() {

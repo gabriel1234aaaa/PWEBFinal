@@ -93,7 +93,7 @@ public class Curso implements Serializable {
 	public void setTurmas(ArrayList<Turma> turmas) {
 		this.turmas = turmas;
 	}
-	
+
 	public void addTurma(Turma turma) {
 		turmas.add(turma);
 	}

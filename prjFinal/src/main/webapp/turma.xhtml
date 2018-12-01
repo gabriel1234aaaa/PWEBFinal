@@ -57,9 +57,10 @@
 			</h:panelGrid>
 
 			<p:commandButton value="Consultar"
-				disabled="#{turmaMB.habilitarCorpo}" update=":formTurma formTurma:cbxCurso"
-				action="#{turmaMB.consultar}" id="btnConsultar"
-				styleClass="ui-priority-primary" icon="fa fa-search" />
+				disabled="#{turmaMB.habilitarCorpo}"
+				update=":formTurma formTurma:cbxCurso" action="#{turmaMB.consultar}"
+				id="btnConsultar" styleClass="ui-priority-primary"
+				icon="fa fa-search" />
 
 			<p:commandButton value="Inserir" id="btnInserir"
 				disabled="#{not turmaMB.modoInsercao}" update=":formTurma"

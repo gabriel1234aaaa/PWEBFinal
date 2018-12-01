@@ -13,11 +13,11 @@
 	margin-right: 10px;
 }
 
-.separadorMenu { 
-   background: #dddddd!important; 
-   border: none !important; 
-   width: 1px !important;  
-   clear: none !important; 
-   height: 30px !important; 
-   margin: 4px 6px 0 !important; 
+.separadorMenu {
+	background: #dddddd !important;
+	border: none !important;
+	width: 1px !important;
+	clear: none !important;
+	height: 30px !important;
+	margin: 4px 6px 0 !important;
 }
