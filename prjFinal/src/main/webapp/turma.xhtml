@@ -21,7 +21,8 @@
 
 				<p:outputLabel for="cbxCurso" value="Curso" />
 				<p:selectOneMenu disabled="#{not turmaMB.habilitarCorpo}"
-					value="#{turmaMB.curso}" converter="converterCurso" id="cbxCurso">
+					value="#{turmaMB.curso}" converter="converterCurso" id="cbxCurso"
+					required="true">
 					<f:selectItems value="#{turmaMB.cursos}" var="aux"
 						itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
