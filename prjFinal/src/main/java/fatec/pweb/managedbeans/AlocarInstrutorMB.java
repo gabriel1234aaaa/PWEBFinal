@@ -33,15 +33,15 @@ public class AlocarInstrutorMB implements Serializable {
 
 	public AlocarInstrutorMB() {
 		cursos = cursoService.getCursos();
-		if(cursos.size() > 0) {
+		if (cursos.size() > 0) {
 			curso = cursos.get(0);
 			turmas = curso.getTurmas();
-			if(turmas.size() > 0) {
+			if (turmas.size() > 0) {
 				turma = turmas.get(0);
 				instrutor = turma.getInstrutor();
 			}
 		}
-		
+
 		instrutores = instrutorService.getInstrutores();
 
 		if (turmas != null && turmas.size() > 0 && instrutor != null) {
@@ -124,7 +124,7 @@ public class AlocarInstrutorMB implements Serializable {
 
 	public void trocaCurso() {
 		turmas = turmaService.getTurmasByCurso(curso);
-		if(turmas.size() > 0)
+		if (turmas.size() > 0)
 			turma = turmas.get(0);
 		else
 			turma = null;
@@ -150,16 +150,6 @@ public class AlocarInstrutorMB implements Serializable {
 			instrutores.set(0, turma.getInstrutor());
 			instrutores.set(indice, temp);
 			instrutor = turma.getInstrutor();
-			situacao = "Alocada";
-			alocado = true;
-		} else {
-			situacao = "Liberada";
-			alocado = false;
-		}
-	}
-
-	public void trocaInstrutor() {
-		if (instrutor.equals(turma.getInstrutor())) {
 			situacao = "Alocada";
 			alocado = true;
 		} else {

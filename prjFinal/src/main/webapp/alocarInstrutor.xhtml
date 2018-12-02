@@ -36,8 +36,6 @@
 				<p:outputLabel for="cbxInstrutor" value="Instrutor" />
 				<p:selectOneMenu value="#{alocarInstrutorMB.instrutor}"
 					converter="converterInstrutor" id="cbxInstrutor" required="true">
-					<p:ajax listener="#{alocarInstrutorMB.trocaInstrutor}"
-						update="btnAlocar btnLiberar txtSituacao" render="@all" />
 					<f:selectItems value="#{alocarInstrutorMB.instrutores}" var="aux"
 						itemValue="#{aux}" itemLabel="#{aux.nome}" />
 				</p:selectOneMenu>
