@@ -127,10 +127,12 @@ public class TurmaMB implements Serializable {
 			modoAlteracao = true;
 			modoInsercao = false;
 			int indice = cursos.indexOf(turma.getCurso());
-			Curso temp = cursos.get(0);
-			cursos.set(0, turma.getCurso());
-			cursos.set(indice, temp);
-			curso = turma.getCurso();
+			if(indice >= 0) {
+				Curso temp = cursos.get(0);
+				cursos.set(0, turma.getCurso());
+				cursos.set(indice, temp);
+				curso = turma.getCurso();
+			}
 		} else {
 			modoAlteracao = false;
 			modoInsercao = true;

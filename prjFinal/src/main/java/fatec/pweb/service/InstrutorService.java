@@ -5,11 +5,13 @@ import java.util.List;
 
 import fatec.pweb.dao.InstrutorDAO;
 import fatec.pweb.model.Instrutor;
+import fatec.pweb.model.Turma;
 
 public class InstrutorService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private InstrutorDAO instrutorDAO = new InstrutorDAO();
+	private TurmaService turmaService = new TurmaService();
 
 	public Instrutor salvar(Instrutor instrutor) {
 		instrutor = instrutorDAO.save(instrutor);
@@ -25,6 +27,10 @@ public class InstrutorService implements Serializable {
 
 	public void remover(Instrutor instrutor) {
 		instrutor = instrutorDAO.getById(Instrutor.class, instrutor.getCpf());
+		for(Turma turma : instrutor.getTurmas()) {
+			turma.setInstrutor(null);
+			turmaService.salvar(turma);
+		}
 		instrutorDAO.remove(instrutor);
 		instrutorDAO.closeEntityManager();
 	}
