@@ -52,6 +52,12 @@ public class Instrutor extends Pessoa implements Serializable {
 		turmas.add(turma);
 	}
 
+	public void remTurma(Turma turma) {
+		int indice = turmas.indexOf(turma);
+		if (indice >= 0)
+			turmas.remove(indice);
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

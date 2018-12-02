@@ -78,11 +78,11 @@ public class TurmaMB implements Serializable {
 	public List<Turma> getTurmas() {
 		return turmaService.getTurmas();
 	}
-	
-	public List<Curso> getCursos(){
-		if(cursos == null)
+
+	public List<Curso> getCursos() {
+		if (cursos == null)
 			cursos = cursoService.getCursos();
-		
+
 		return cursos;
 	}
 
