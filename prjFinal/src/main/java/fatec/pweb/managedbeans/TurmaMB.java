@@ -90,7 +90,8 @@ public class TurmaMB implements Serializable {
 		turma.setCurso(curso);
 		curso.addTurma(turma);
 
-		turma = turmaService.salvar(turma);
+		turmaService.salvar(turma);
+		cursoService.salvar(curso);
 		if (modoInsercao) {
 			Util.addInfo("Inserção", "A turma foi inserida com sucesso!");
 		} else {
@@ -129,6 +130,7 @@ public class TurmaMB implements Serializable {
 			Curso temp = cursos.get(0);
 			cursos.set(0, turma.getCurso());
 			cursos.set(indice, temp);
+			curso = turma.getCurso();
 		} else {
 			modoAlteracao = false;
 			modoInsercao = true;
