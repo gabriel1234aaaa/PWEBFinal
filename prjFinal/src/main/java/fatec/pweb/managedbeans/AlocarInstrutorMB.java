@@ -159,10 +159,6 @@ public class AlocarInstrutorMB implements Serializable {
 	}
 
 	public void alocar() {
-		if (turma.getInstrutor() != null) {
-			turma.getInstrutor().remTurma(turma);
-			instrutorService.salvar(turma.getInstrutor());
-		}
 		turma.setInstrutor(instrutor);
 		instrutor.addTurma(turma);
 

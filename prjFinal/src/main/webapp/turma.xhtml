@@ -24,7 +24,7 @@
 					value="#{turmaMB.curso}" converter="converterCurso" id="cbxCurso"
 					required="true">
 					<f:selectItems value="#{turmaMB.cursos}" var="aux"
-						itemValue="#{aux}" itemLabel="#{aux.nome}" />
+						itemValue="#{aux}" itemLabel="#{aux.sigla}" />
 				</p:selectOneMenu>
 
 				<p:outputLabel for="txtDescricao" value="Descrição da Turma" />

@@ -17,7 +17,9 @@ public class CursoConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Curso c = null;
 		if (value != null && !value.equals("")) {
-			c = servico.getCursoByNome(value);
+			c = new Curso();
+			c.setSigla(value);
+			c = servico.getById(c);
 		}
 		return c;
 	}
@@ -27,7 +29,7 @@ public class CursoConverter implements Converter {
 		if (value == null || value.equals("")) {
 			return null;
 		} else {
-			return ((Curso) value).getNome();
+			return ((Curso) value).getSigla();
 		}
 	}
 
