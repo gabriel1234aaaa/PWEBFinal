@@ -40,6 +40,7 @@ public class Util {
 	public static void addInfo(String summary, String detail) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
 		FacesContext.getCurrentInstance().addMessage(null, message);
+		
 	}
 
 	public static void addErro(String summary, String detail) {
