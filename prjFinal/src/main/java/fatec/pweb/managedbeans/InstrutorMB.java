@@ -6,7 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import fatec.pweb.model.Aluno;
 import fatec.pweb.model.Instrutor;
+import fatec.pweb.service.AlunoService;
 import fatec.pweb.service.InstrutorService;
 import fatec.pweb.util.Util;
 
@@ -94,17 +96,32 @@ public class InstrutorMB implements Serializable {
 	}
 
 	public void consultar() {
-		Instrutor consulta = servico.getById(instrutor);
-		habilitarCorpo = true;
-		if (consulta != null) {
-			instrutor = consulta;
-			modoAlteracao = true;
-			modoInsercao = false;
+		if (Util.validarCPF(instrutor.getCpf().replaceAll("[^0-9]", ""))) {
+			AlunoService alunoService = new AlunoService();
+			Aluno aluno = new Aluno();
+			aluno.setCpf(instrutor.getCpf());
+			aluno = alunoService.getById(aluno);
+
+			if (aluno != null) {
+				Util.addErro("CPF Inválido", "O CPF já está sendo utilizado por um aluno.");
+				focus = "txtCpf";
+			} else {
+				Instrutor consulta = servico.getById(instrutor);
+				habilitarCorpo = true;
+				if (consulta != null) {
+					instrutor = consulta;
+					modoAlteracao = true;
+					modoInsercao = false;
+				} else {
+					modoAlteracao = false;
+					modoInsercao = true;
+				}
+				focus = "txtNome";
+			}
 		} else {
-			modoAlteracao = false;
-			modoInsercao = true;
+			Util.addErro("CPF Inválido", "Por favor, digite um CPF válido.");
+			focus = "txtCpf";
 		}
-		focus = "txtNome";
 	}
 
 }
