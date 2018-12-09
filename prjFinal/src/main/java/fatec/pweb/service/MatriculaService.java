@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import fatec.pweb.dao.MatriculaDAO;
+import fatec.pweb.model.Aluno;
 import fatec.pweb.model.Matricula;
 
 public class MatriculaService implements Serializable {
@@ -29,4 +30,10 @@ public class MatriculaService implements Serializable {
 		matriculaDAO.remove(matricula);
 		matriculaDAO.closeEntityManager();
 	}
+	
+	public Matricula getMatriculaByIds(String cpf,String siglaTurma) {
+		return matriculaDAO.getEntityManager()
+				.createQuery("SELECT o FROM Matricula o WHERE o.cpfaluno = '" + cpf + "' and o.siglaturma = '" + siglaTurma + "'", Matricula.class).getSingleResult();
+	}
+	
 }

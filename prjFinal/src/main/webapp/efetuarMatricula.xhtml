@@ -1,0 +1,162 @@
+<ui:composition template="comuns/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:tm="http://java.sun.com/jsf/composite/terminal/1_0/components">
+
+	<ui:define name="title">
+		<h:outputText value="Efetuar Matrícula" />
+	</ui:define>
+
+	<ui:define name="principal">
+		<h:form id="formMatricula">
+			<p:growl id="message" showDetail="true" />
+			<p:focus for="#{matriculaMB.focus}" />
+			<h:panelGrid columns="4" cellpadding="5">
+
+				<p:outputLabel for="txtDtMatricula" value="Data da Matrícula" />
+				<p:inputMask id="txtDtMatricula"
+					value="#{matriculaMB.matricula.data}" mask="99/99/9999"
+					disabled="#{matriculaMB.habilitarCorpo}" required="true" />
+
+				<p:outputLabel value="" />
+				<p:outputLabel value="" />
+
+				<p:outputLabel for="cbxCurso" value="Curso" />
+				<p:selectOneMenu value="#{matriculaMB.curso}"
+					converter="converterCurso" id="cbxCurso" required="true">
+					<p:ajax listener="#{matriculaMB.trocaCurso}"
+						update=":formMatricula" render="@all" />
+					<f:selectItems value="#{matriculaMB.cursos}" var="aux"
+						itemValue="#{aux}" itemLabel="#{aux.sigla}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel for="txtValCurso" value="Valor curso" />
+				<p:inputText id="txtValCurso" value="#{matriculaMB.curso.valor}"
+					disabled="true">
+					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+				</p:inputText>
+
+
+				<p:outputLabel for="cbxTurma" value="Turma" />
+				<p:selectOneMenu value="#{matriculaMB.turma}"
+					converter="converterTurma" id="cbxTurma" required="true">
+					<f:selectItems value="#{matriculaMB.turmas}" var="aux"
+						itemValue="#{aux}" itemLabel="#{aux.siglaTurma}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="" />
+				<p:outputLabel value="" />
+
+				<p:outputLabel for="txtCpf" value="CPF" />
+				<p:inputMask id="txtCpf" value="#{matriculaMB.aluno.cpf}"
+					mask="999.999.999-99" disabled="#{not matriculaMB.campoCpf}"
+					required="true" />
+
+				<p:outputLabel for="txtNome" value="Nome" />
+				<p:inputText id="txtNome" value="#{matriculaMB.aluno.nome}"
+					disabled="true" />
+
+			</h:panelGrid>
+
+
+			<h:panelGrid columns="1" cellpadding="5">
+				<p:selectOneRadio id="customRadio" value="#{matriculaMB.selecionado}"
+					layout="custom">
+					<f:selectItem itemLabel="À Vista" itemValue="Avista" />
+					<f:selectItem itemLabel="Parcelado" itemValue="Aprazo" />
+				</p:selectOneRadio>
+				<h3>Pagamento</h3>
+				<h:panelGrid columns="9" cellpadding="5">
+
+					<h:outputLabel for="rdbAvista" value="À Vista" />
+					<p:radioButton id="rdbAvista" for="customRadio" itemIndex="0" disabled="#{matriculaMB.habilitarCorpo}"/>
+
+					<p:outputLabel value="" />
+
+					<p:outputLabel for="txtAgencia" value="Agência" />
+					<p:inputText id="txtAgencia"
+						value="#{matriculaMB.aVista.agencia}"
+						disabled="#{not matriculaMB.compoAvista}" required="false" />
+
+					<p:outputLabel for="txtNumCheque" value="No. Cheque" />
+					<p:inputText id="txtNumCheque"
+						value="#{matriculaMB.aVista.nCheque}"
+						disabled="#{not matriculaMB.compoAvista}" required="false" />
+
+					<p:outputLabel for="txtDtPag" value="Data Pagto." />
+					<p:inputMask id="txtDtPag"
+						value="#{matriculaMB.aVista.preData}" mask="99/99/9999"
+						disabled="#{not matriculaMB.compoAvista}" required="false" />
+
+					<h:outputLabel for="rdbAprazo" value="Parcelado" />
+					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1" disabled="#{matriculaMB.habilitarCorpo}"/>
+
+					<p:outputLabel value="" />
+
+					<p:outputLabel for="txtQtdMens" value="Qtde. Mensalidades" />
+					<p:inputText id="txtQtdMens"
+						value="#{matriculaMB.aPrazo.qtdeMensalidade}"
+						disabled="#{not matriculaMB.compoAprazo}" required="false" />
+
+					<p:outputLabel for="txtTaxJuros" value="Tx. Juros(%)" />
+					<p:inputText id="txtTaxJuros"
+						value="#{matriculaMB.aPrazo.taxaJuros}"
+						disabled="#{not matriculaMB.compoAprazo}" required="false">
+						<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
+					</p:inputText>
+
+
+					<p:outputLabel for="txtDtVenc" value="Data 1o. Vencto." />
+					<p:inputMask id="txtDtVenc"
+						value="#{matriculaMB.aPrazo.dtVencimento}"
+						mask="99/99/9999" disabled="#{not matriculaMB.compoAprazo}"
+						required="false" />
+
+
+
+				</h:panelGrid>
+
+			</h:panelGrid>
+
+			<p:commandButton value="Consultar"
+				disabled="#{matriculaMB.habilitarCorpo}" update=":formMatricula"
+				action="#{matriculaMB.consultar}" id="btnConsultar"
+				styleClass="ui-priority-primary" icon="fa fa-search" />
+
+			<p:commandButton value="Inserir" id="btnInserir"
+				disabled="#{not matriculaMB.modoInsercao}" update=":formMatricula"
+				action="#{matriculaMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-check" />
+
+			<p:commandButton value="Alterar" id="btnAlterar"
+				disabled="#{not matriculaMB.modoAlteracao}" update=":formMatricula"
+				action="#{matriculaMB.salvar}" styleClass="ui-priority-primary"
+				icon="fa fa-edit" />
+
+			<p:commandButton value="Excluir" id="btnExcluir"
+				disabled="#{not matriculaMB.modoAlteracao}"
+				update=":formMatricula message" action="#{matriculaMB.remover}"
+				styleClass="ui-priority-primary" icon="fa fa-close">
+				<p:confirm header="Confirmar Exclusão"
+					message="Você tem certeza que deseja excluir a matricula?"
+					icon="fa fa-exclamation-triangle" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="fa fa-close" />
+			</p:confirmDialog>
+
+			<p:button value="Cancelar" id="btnCancelar"
+				disabled="#{not matriculaMB.habilitarCorpo}"
+				styleClass="ui-priority-primary" icon="fa fa-ban" type="reset" />
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
