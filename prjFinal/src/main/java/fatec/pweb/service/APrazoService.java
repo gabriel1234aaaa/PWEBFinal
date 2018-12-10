@@ -5,6 +5,7 @@ import java.util.List;
 
 import fatec.pweb.dao.APrazoDAO;
 import fatec.pweb.model.APrazo;
+import fatec.pweb.model.Matricula;
 
 public class APrazoService implements Serializable {
 
@@ -28,5 +29,10 @@ public class APrazoService implements Serializable {
 		aPrazo = aPrazoDAO.getById(APrazo.class, aPrazo.getCodigo());
 		aPrazoDAO.remove(aPrazo);
 		aPrazoDAO.closeEntityManager();
+	}
+	
+	public APrazo getAprazoById(int codigo) {
+		return aPrazoDAO.getEntityManager()
+				.createQuery("SELECT o FROM APrazo o WHERE o.codigo = '" + codigo + "'", APrazo.class).getSingleResult();
 	}
 }

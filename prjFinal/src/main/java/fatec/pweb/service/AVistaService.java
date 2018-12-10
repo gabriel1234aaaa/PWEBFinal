@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import fatec.pweb.dao.AVistaDAO;
+import fatec.pweb.model.APrazo;
 import fatec.pweb.model.AVista;
 
 public class AVistaService implements Serializable {
@@ -28,6 +29,11 @@ public class AVistaService implements Serializable {
 		aVista = aVistaDAO.getById(AVista.class, aVista.getCodigo());
 		aVistaDAO.remove(aVista);
 		aVistaDAO.closeEntityManager();
+	}
+	
+	public AVista getAvistaById(int codigo) {
+		return aVistaDAO.getEntityManager()
+				.createQuery("SELECT o FROM Avista o WHERE o.codigo = '" + codigo + "'", AVista.class).getSingleResult();
 	}
 
 }

@@ -3,6 +3,7 @@ package fatec.pweb.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.inject.Alternative;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -231,7 +232,7 @@ public class MatriculaMB implements Serializable {
 			Instrutor instrutor = new Instrutor();
 			instrutor.setCpf(aluno.getCpf());
 			instrutor = instrutorService.getById(instrutor);
-
+			
 			if (instrutor != null) {
 				Util.addErro("CPF Inválido", "O CPF já está sendo utilizado por um instrutor.");
 				focus = "txtCpf";
@@ -241,16 +242,18 @@ public class MatriculaMB implements Serializable {
 				habilitarCorpo = true;
 				if (consultaAluno != null) {
 					Matricula consultaMatricula = matriculaService.getMatriculaByIds(aluno.getCpf(),
-							turma.getSiglaTurma());
-
+					turma.getSiglaTurma());
+					
 					if (consultaMatricula != null) {
 						matricula = consultaMatricula;
 						modoAlteracao = true;
 						modoInsercao = false;
 						if (matricula.getAprazo() != null) {
 							compoAprazo = true;
+							aPrazo = aPrazoService.getAprazoById(matricula.getAprazo().getCodigo());
 						} else {
 							compoAvista = true;
+							aVista = aVistaService.getAvistaById(matricula.getAvista().getCodigo());
 						}
 
 					} else {
