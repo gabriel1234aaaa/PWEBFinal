@@ -25,7 +25,6 @@ public class TurmaService implements Serializable {
 	}
 
 	public void remover(Turma turma) {
-		turma = turmaDAO.getById(Turma.class, turma.getSiglaTurma());
 		turmaDAO.remove(turma);
 		turmaDAO.closeEntityManager();
 	}

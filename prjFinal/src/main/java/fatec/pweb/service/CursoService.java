@@ -15,7 +15,6 @@ public class CursoService implements Serializable {
 		curso = cursoDAO.save(curso);
 		cursoDAO.closeEntityManager();
 		return curso;
-
 	}
 
 	public List<Curso> getCursos() {
@@ -25,7 +24,6 @@ public class CursoService implements Serializable {
 	}
 
 	public void remover(Curso curso) {
-		curso = cursoDAO.getById(Curso.class, curso.getSigla());
 		cursoDAO.remove(curso);
 		cursoDAO.closeEntityManager();
 	}

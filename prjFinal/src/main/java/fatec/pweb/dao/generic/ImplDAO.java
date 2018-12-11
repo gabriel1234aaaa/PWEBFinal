@@ -11,8 +11,8 @@ import javax.persistence.Persistence;
 public abstract class ImplDAO<T, I extends Serializable> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static EntityManagerFactory emf;
-	private EntityManager em;
+	private static transient EntityManagerFactory emf;
+	private transient EntityManager em;
 
 	public ImplDAO() {
 

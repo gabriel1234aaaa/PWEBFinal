@@ -19,7 +19,6 @@ public class MatriculaService implements Serializable {
 		matricula = matriculaDAO.save(matricula);
 		matriculaDAO.closeEntityManager();
 		return matricula;
-
 	}
 
 	public List<Matricula> getMatriculas() {
@@ -29,7 +28,6 @@ public class MatriculaService implements Serializable {
 	}
 
 	public void remover(Matricula matricula) {
-		matricula = matriculaDAO.getById(Matricula.class, matricula.getCodigo());
 		matriculaDAO.remove(matricula);
 		matriculaDAO.closeEntityManager();
 	}

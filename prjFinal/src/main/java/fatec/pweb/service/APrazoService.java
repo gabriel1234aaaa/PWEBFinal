@@ -15,7 +15,6 @@ public class APrazoService implements Serializable {
 		aPrazo = aPrazoDAO.save(aPrazo);
 		aPrazoDAO.closeEntityManager();
 		return aPrazo;
-
 	}
 
 	public List<APrazo> getAPrazos() {
@@ -25,13 +24,13 @@ public class APrazoService implements Serializable {
 	}
 
 	public void remover(APrazo aPrazo) {
-		aPrazo = aPrazoDAO.getById(APrazo.class, aPrazo.getCodigo());
 		aPrazoDAO.remove(aPrazo);
 		aPrazoDAO.closeEntityManager();
 	}
 	
-	public APrazo getAprazoById(int codigo) {
-		return aPrazoDAO.getEntityManager()
-				.createQuery("SELECT o FROM APrazo o WHERE o.codigo = '" + codigo + "'", APrazo.class).getSingleResult();
+	public APrazo getById(APrazo aPrazo) {
+		aPrazo = aPrazoDAO.getById(APrazo.class, aPrazo.getCodigo());
+		aPrazoDAO.closeEntityManager();
+		return aPrazo;
 	}
 }

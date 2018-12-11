@@ -15,15 +15,7 @@
 			<p:growl id="message" showDetail="true" />
 			<p:focus for="#{matriculaMB.focus}" />
 			<h:panelGrid columns="4" cellpadding="5">
-
-				<p:outputLabel for="txtDtMatricula" value="Data da Matrícula" />
-				<p:inputMask id="txtDtMatricula"
-					value="#{matriculaMB.matricula.data}" mask="99/99/9999"
-					disabled="#{matriculaMB.habilitarCorpo}" required="true" />
-
-				<p:outputLabel value="" />
-				<p:outputLabel value="" />
-
+			
 				<p:outputLabel for="cbxCurso" value="Curso" />
 				<p:selectOneMenu value="#{matriculaMB.curso}"
 					converter="converterCurso" id="cbxCurso" required="true">
@@ -52,21 +44,27 @@
 
 				<p:outputLabel for="txtCpf" value="CPF" />
 				<p:inputMask id="txtCpf" value="#{matriculaMB.aluno.cpf}"
-					mask="999.999.999-99" disabled="#{not matriculaMB.campoCpf}"
+					mask="999.999.999-99" disabled="#{matriculaMB.habilitarCorpo}"
 					required="true" />
 
 				<p:outputLabel for="txtNome" value="Nome" />
 				<p:inputText id="txtNome" value="#{matriculaMB.aluno.nome}"
 					disabled="true" />
 
+				<p:outputLabel for="txtDtMatricula" value="Data da Matrícula" />
+				<p:inputMask id="txtDtMatricula"
+					value="#{matriculaMB.matricula.data}" mask="99/99/9999"
+					disabled="#{not matriculaMB.habilitarData}" required="true" />
+
 			</h:panelGrid>
 
 
 			<h:panelGrid columns="1" cellpadding="5">
-				<p:selectOneRadio id="customRadio" value="#{matriculaMB.selecionado}"
-					layout="custom">
+				<p:selectOneRadio id="customRadio"
+					value="#{matriculaMB.selecionado}" layout="custom">
 					<p:ajax listener="#{matriculaMB.selecionaRadio}"
-						update="txtAgencia txtNumCheque txtDtPag txtQtdMens txtTaxJuros txtDtVenc" render="@all" />
+						update="txtAgencia txtNumCheque txtDtPag txtQtdMens txtTaxJuros txtDtVenc"
+						render="@all" />
 					<f:selectItem itemLabel="À Vista" itemValue="Avista" />
 					<f:selectItem itemLabel="Parcelado" itemValue="Aprazo" />
 				</p:selectOneRadio>
@@ -74,13 +72,13 @@
 				<h:panelGrid columns="9" cellpadding="5">
 
 					<h:outputLabel for="rdbAvista" value="À Vista" />
-					<p:radioButton id="rdbAvista" for="customRadio" itemIndex="0" disabled="#{not matriculaMB.habilitarCorpo}"/>
+					<p:radioButton id="rdbAvista" for="customRadio" itemIndex="0"
+						disabled="#{not matriculaMB.habilitarCorpo}" />
 
 					<p:outputLabel value="" />
 
 					<p:outputLabel for="txtAgencia" value="Agência" />
-					<p:inputText id="txtAgencia"
-						value="#{matriculaMB.aVista.agencia}"
+					<p:inputText id="txtAgencia" value="#{matriculaMB.aVista.agencia}"
 						disabled="#{not matriculaMB.compoAvista}" required="false" />
 
 					<p:outputLabel for="txtNumCheque" value="No. Cheque" />
@@ -89,12 +87,13 @@
 						disabled="#{not matriculaMB.compoAvista}" required="false" />
 
 					<p:outputLabel for="txtDtPag" value="Data Pagto." />
-					<p:inputMask id="txtDtPag"
-						value="#{matriculaMB.aVista.preData}" mask="99/99/9999"
-						disabled="#{not matriculaMB.compoAvista}" required="false" />
+					<p:inputMask id="txtDtPag" value="#{matriculaMB.aVista.preData}"
+						mask="99/99/9999" disabled="#{not matriculaMB.compoAvista}"
+						required="false" />
 
 					<h:outputLabel for="rdbAprazo" value="Parcelado" />
-					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1" disabled="#{not matriculaMB.habilitarCorpo}"/>
+					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1"
+						disabled="#{not matriculaMB.habilitarCorpo}" />
 
 					<p:outputLabel value="" />
 
@@ -113,9 +112,8 @@
 
 					<p:outputLabel for="txtDtVenc" value="Data 1o. Vencto." />
 					<p:inputMask id="txtDtVenc"
-						value="#{matriculaMB.aPrazo.dtVencimento}"
-						mask="99/99/9999" disabled="#{not matriculaMB.compoAprazo}"
-						required="false" />
+						value="#{matriculaMB.aPrazo.dtVencimento}" mask="99/99/9999"
+						disabled="#{not matriculaMB.compoAprazo}" required="false" />
 
 
 

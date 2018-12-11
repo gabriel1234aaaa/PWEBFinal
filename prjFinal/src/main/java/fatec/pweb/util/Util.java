@@ -1,9 +1,13 @@
 package fatec.pweb.util;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-public class Util {
+public class Util implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	public static boolean validarCPF(String cpf) {
 		if (cpf.length() < 11) {

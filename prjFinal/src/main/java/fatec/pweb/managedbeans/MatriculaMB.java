@@ -42,10 +42,10 @@ public class MatriculaMB implements Serializable {
 	private AVista aVista = new AVista();
 	private AVistaService aVistaService = new AVistaService();
 
-	private String focus = "txtDtMatricula";
-	private String selecionado = "rdbAvista";
+	private String focus = "txtCpf";
+	private String selecionado;
 
-	private boolean campoCpf = false;
+	private boolean habilitarData = false;
 	private boolean habilitarCorpo = false;
 	private boolean modoInsercao = false;
 	private boolean modoAlteracao = false;
@@ -61,8 +61,6 @@ public class MatriculaMB implements Serializable {
 				turma = turmas.get(0);
 			}
 		}
-
-		liberaCpf();
 	}
 
 	public void trocaCurso() {
@@ -71,16 +69,6 @@ public class MatriculaMB implements Serializable {
 			turma = turmas.get(0);
 		else
 			turma = null;
-
-		liberaCpf();
-	}
-
-	public void liberaCpf() {
-		if (turma != null) {
-			campoCpf = true;
-		} else {
-			campoCpf = false;
-		}
 	}
 
 	public Curso getCurso() {
@@ -166,15 +154,15 @@ public class MatriculaMB implements Serializable {
 	public void salvar() {
 		AVista tempAVista = null;
 		APrazo tempAPrazo = null;
-		
-		if (aPrazo != null) {
-			if(matricula.getAvista() != null){
+
+		if (selecionado.equals("Aprazo")) {
+			if (matricula.getAvista() != null) {
 				tempAVista = matricula.getAvista();
 			}
 			aPrazo = aPrazoService.salvar(aPrazo);
 			aVista = null;
-		} else {
-			if(matricula.getAprazo() != null){
+		} else if (selecionado.equals("Avista")) {
+			if (matricula.getAprazo() != null) {
 				tempAPrazo = matricula.getAprazo();
 			}
 			aVista = aVistaService.salvar(aVista);
@@ -187,10 +175,10 @@ public class MatriculaMB implements Serializable {
 		matricula.setTurma(turma);
 
 		matricula = matriculaService.salvar(matricula);
-		
-		if(tempAVista != null)
+
+		if (tempAVista != null)
 			aVistaService.remover(tempAVista);
-		if(tempAPrazo != null)
+		if (tempAPrazo != null)
 			aPrazoService.remover(tempAPrazo);
 		if (modoInsercao) {
 			Util.addInfo("Inserção", "A matrícula foi inserida com sucesso!");
@@ -201,42 +189,47 @@ public class MatriculaMB implements Serializable {
 		aVista = new AVista();
 		aPrazo = new APrazo();
 		matricula = new Matricula();
+		aluno = new Aluno();
 
 		compoAprazo = false;
 		compoAvista = false;
+		habilitarData = false;
 		habilitarCorpo = false;
 		modoAlteracao = false;
 		modoInsercao = false;
+		selecionado = "AVista";
 		focus = "txtCpf";
-
 	}
 
 	public void remover() {
-
 		if (matricula.getAprazo() != null) {
 			aPrazo = matricula.getAprazo();
+			aVista = null;
 		} else {
 			aVista = matricula.getAvista();
+			aPrazo = null;
 		}
 
 		matriculaService.remover(matricula);
-		if (aPrazo != null) {
+
+		if (aPrazo != null)
 			aPrazoService.remover(aPrazo);
-		} else {
+		if (aVista != null)
 			aVistaService.remover(aVista);
-		}
 
 		Util.addInfo("Exclusão", "A matrícula foi excluída com sucesso!");
 
 		aVista = new AVista();
 		aPrazo = new APrazo();
 		matricula = new Matricula();
+		aluno = new Aluno();
 
+		habilitarData = false;
 		habilitarCorpo = false;
 		modoAlteracao = false;
 		modoInsercao = false;
+		selecionado = "AVista";
 		focus = "txtCpf";
-
 	}
 
 	public void consultar() {
@@ -251,31 +244,34 @@ public class MatriculaMB implements Serializable {
 				focus = "txtCpf";
 			} else {
 				aluno = alunoService.getById(aluno);
-
-				habilitarCorpo = true;
 				if (aluno != null) {
+					habilitarCorpo = true;
 					Matricula consultaMatricula = matriculaService.getMatriculaByIds(aluno, turma);
 
 					if (consultaMatricula != null) {
 						matricula = consultaMatricula;
 						modoAlteracao = true;
 						modoInsercao = false;
+						habilitarData = false;
 						if (matricula.getAprazo() != null) {
 							selecionado = "Aprazo";
+							focus = "txtQtdMens";
 						} else {
 							selecionado = "Avista";
+							focus = "txtAgencia";
 						}
-						selecionaRadio();
 					} else {
+						selecionado = "Avista";
 						modoAlteracao = false;
 						modoInsercao = true;
+						habilitarData = true;
+						focus = "txtDtMatricula";
 					}
-
+					selecionaRadio();
 				} else {
 					Util.addErro("404 - Não Encontrado", "Aluno não encontrado nos registros.");
 					focus = "txtCpf";
 				}
-				focus = "txtCpf";
 			}
 		} else {
 			Util.addErro("CPF Inválido", "Por favor, digite um CPF válido.");
@@ -307,12 +303,12 @@ public class MatriculaMB implements Serializable {
 		this.selecionado = selecionado;
 	}
 
-	public boolean isCampoCpf() {
-		return campoCpf;
+	public boolean isHabilitarData() {
+		return habilitarData;
 	}
 
-	public void setCampoCpf(boolean campoCpf) {
-		this.campoCpf = campoCpf;
+	public void setHabilitarData(boolean habilitarData) {
+		this.habilitarData = habilitarData;
 	}
 
 	public APrazo getaPrazo() {
@@ -332,15 +328,15 @@ public class MatriculaMB implements Serializable {
 	}
 
 	public void selecionaRadio() {
-		if (selecionado.compareTo("Aprazo") == 0) {
-			if(matricula.getAprazo() != null)
-				aPrazo = aPrazoService.getAprazoById(matricula.getAprazo().getCodigo());
+		if (selecionado.equals("Aprazo")) {
+			if (matricula.getAprazo() != null)
+				aPrazo = aPrazoService.getById(matricula.getAprazo());
 			compoAprazo = true;
 			compoAvista = false;
 			aVista = new AVista();
 		} else {
-			if(matricula.getAvista() != null)
-				aVista = aVistaService.getAvistaById(matricula.getAvista().getCodigo());
+			if (matricula.getAvista() != null)
+				aVista = aVistaService.getById(matricula.getAvista());
 			compoAvista = true;
 			compoAprazo = false;
 			aPrazo = new APrazo();

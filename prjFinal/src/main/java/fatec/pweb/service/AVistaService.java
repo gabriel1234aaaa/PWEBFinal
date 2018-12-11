@@ -15,7 +15,6 @@ public class AVistaService implements Serializable {
 		aVista = aVistaDAO.save(aVista);
 		aVistaDAO.closeEntityManager();
 		return aVista;
-
 	}
 
 	public List<AVista> getAVistas() {
@@ -25,14 +24,14 @@ public class AVistaService implements Serializable {
 	}
 
 	public void remover(AVista aVista) {
-		aVista = aVistaDAO.getById(AVista.class, aVista.getCodigo());
 		aVistaDAO.remove(aVista);
 		aVistaDAO.closeEntityManager();
 	}
 	
-	public AVista getAvistaById(int codigo) {
-		return aVistaDAO.getEntityManager()
-				.createQuery("SELECT o FROM AVista o WHERE o.codigo = '" + codigo + "'", AVista.class).getSingleResult();
+	public AVista getById(AVista aVista) {
+		aVista = aVistaDAO.getById(AVista.class, aVista.getCodigo());
+		aVistaDAO.closeEntityManager();
+		return aVista;
 	}
 
 }
