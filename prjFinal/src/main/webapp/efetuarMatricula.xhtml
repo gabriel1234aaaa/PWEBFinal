@@ -15,7 +15,7 @@
 			<p:growl id="message" showDetail="true" />
 			<p:focus for="#{matriculaMB.focus}" />
 			<h:panelGrid columns="4" cellpadding="5">
-			
+
 				<p:outputLabel for="cbxCurso" value="Curso" />
 				<p:selectOneMenu value="#{matriculaMB.curso}"
 					converter="converterCurso" id="cbxCurso" required="true">
@@ -26,11 +26,8 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel for="txtValCurso" value="Valor curso" />
-				<p:inputText id="txtValCurso" value="#{matriculaMB.curso.valor}"
-					disabled="true">
-					<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
-				</p:inputText>
-
+				<p:inputText id="txtValCurso" value="#{matriculaMB.valorCurso}"
+					disabled="true" />
 
 				<p:outputLabel for="cbxTurma" value="Turma" />
 				<p:selectOneMenu value="#{matriculaMB.turma}"
@@ -61,7 +58,8 @@
 
 			<h:panelGrid columns="1" cellpadding="5">
 				<p:selectOneRadio id="customRadio"
-					value="#{matriculaMB.selecionado}" layout="custom">
+					value="#{matriculaMB.selecionado}" layout="custom" required="true"
+					disabled="#{not matriculaMB.habilitarCorpo}">
 					<p:ajax listener="#{matriculaMB.selecionaRadio}"
 						update="txtAgencia txtNumCheque txtDtPag txtQtdMens txtTaxJuros txtDtVenc"
 						render="@all" />
@@ -79,17 +77,17 @@
 
 					<p:outputLabel for="txtAgencia" value="Agência" />
 					<p:inputText id="txtAgencia" value="#{matriculaMB.aVista.agencia}"
-						disabled="#{not matriculaMB.compoAvista}" required="false" />
+						disabled="#{not matriculaMB.compoAvista}" required="true" />
 
 					<p:outputLabel for="txtNumCheque" value="No. Cheque" />
 					<p:inputText id="txtNumCheque"
 						value="#{matriculaMB.aVista.nCheque}"
-						disabled="#{not matriculaMB.compoAvista}" required="false" />
+						disabled="#{not matriculaMB.compoAvista}" required="true" />
 
 					<p:outputLabel for="txtDtPag" value="Data Pagto." />
 					<p:inputMask id="txtDtPag" value="#{matriculaMB.aVista.preData}"
 						mask="99/99/9999" disabled="#{not matriculaMB.compoAvista}"
-						required="false" />
+						required="true" />
 
 					<h:outputLabel for="rdbAprazo" value="Parcelado" />
 					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1"
@@ -100,22 +98,19 @@
 					<p:outputLabel for="txtQtdMens" value="Qtde. Mensalidades" />
 					<p:inputText id="txtQtdMens"
 						value="#{matriculaMB.aPrazo.qtdeMensalidade}"
-						disabled="#{not matriculaMB.compoAprazo}" required="false" />
+						disabled="#{not matriculaMB.compoAprazo}" required="true" />
 
 					<p:outputLabel for="txtTaxJuros" value="Tx. Juros(%)" />
 					<p:inputText id="txtTaxJuros"
 						value="#{matriculaMB.aPrazo.taxaJuros}"
-						disabled="#{not matriculaMB.compoAprazo}" required="false">
+						disabled="#{not matriculaMB.compoAprazo}" required="true">
 						<f:convertNumber minFractionDigits="2" maxFractionDigits="2" />
 					</p:inputText>
-
 
 					<p:outputLabel for="txtDtVenc" value="Data 1o. Vencto." />
 					<p:inputMask id="txtDtVenc"
 						value="#{matriculaMB.aPrazo.dtVencimento}" mask="99/99/9999"
-						disabled="#{not matriculaMB.compoAprazo}" required="false" />
-
-
+						disabled="#{not matriculaMB.compoAprazo}" required="true" />
 
 				</h:panelGrid>
 
@@ -153,7 +148,6 @@
 			</p:confirmDialog>
 
 			<p:button value="Cancelar" id="btnCancelar"
-				disabled="#{not matriculaMB.habilitarCorpo}"
 				styleClass="ui-priority-primary" icon="fa fa-ban" type="reset" />
 
 		</h:form>

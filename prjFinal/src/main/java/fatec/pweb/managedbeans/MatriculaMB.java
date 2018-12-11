@@ -1,6 +1,7 @@
 package fatec.pweb.managedbeans;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -44,6 +45,7 @@ public class MatriculaMB implements Serializable {
 
 	private String focus = "txtCpf";
 	private String selecionado;
+	private String valorCurso;
 
 	private boolean habilitarData = false;
 	private boolean habilitarCorpo = false;
@@ -224,6 +226,8 @@ public class MatriculaMB implements Serializable {
 		matricula = new Matricula();
 		aluno = new Aluno();
 
+		compoAprazo = false;
+		compoAvista = false;
 		habilitarData = false;
 		habilitarCorpo = false;
 		modoAlteracao = false;
@@ -243,8 +247,9 @@ public class MatriculaMB implements Serializable {
 				Util.addErro("CPF Inválido", "O CPF já está sendo utilizado por um instrutor.");
 				focus = "txtCpf";
 			} else {
-				aluno = alunoService.getById(aluno);
-				if (aluno != null) {
+				Aluno temp = alunoService.getById(aluno);
+				if (temp != null) {
+					aluno = temp;
 					habilitarCorpo = true;
 					Matricula consultaMatricula = matriculaService.getMatriculaByIds(aluno, turma);
 
@@ -327,6 +332,20 @@ public class MatriculaMB implements Serializable {
 		this.aVista = aVista;
 	}
 
+	public String getValorCurso() {
+		if(curso == null) {
+			valorCurso = "Selecione um curso.";
+		}else {
+			DecimalFormat df = new DecimalFormat("R$ #,##0.00");
+			valorCurso = df.format(curso.getValor());
+		}
+		return valorCurso;
+	}
+
+	public void setValorCurso(String valorCurso) {
+		this.valorCurso = valorCurso;
+	}
+
 	public void selecionaRadio() {
 		if (selecionado.equals("Aprazo")) {
 			if (matricula.getAprazo() != null)
@@ -341,6 +360,5 @@ public class MatriculaMB implements Serializable {
 			compoAprazo = false;
 			aPrazo = new APrazo();
 		}
-
 	}
 }
