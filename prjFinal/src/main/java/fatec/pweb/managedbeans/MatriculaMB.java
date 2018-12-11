@@ -3,7 +3,6 @@ package fatec.pweb.managedbeans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.enterprise.inject.Alternative;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -47,8 +46,6 @@ public class MatriculaMB implements Serializable {
 	private String selecionado = "rdbAvista";
 
 	private boolean campoCpf = false;
-	private boolean rdbAprazo = false;
-	private boolean rdbAvista = false;
 	private boolean habilitarCorpo = false;
 	private boolean modoInsercao = false;
 	private boolean modoAlteracao = false;
@@ -72,7 +69,6 @@ public class MatriculaMB implements Serializable {
 		turmas = turmaService.getTurmasByCurso(curso);
 		if (turmas.size() > 0)
 			turma = turmas.get(0);
-
 		else
 			turma = null;
 
@@ -168,19 +164,34 @@ public class MatriculaMB implements Serializable {
 	}
 
 	public void salvar() {
-
+		AVista tempAVista = null;
+		APrazo tempAPrazo = null;
+		
 		if (aPrazo != null) {
+			if(matricula.getAvista() != null){
+				tempAVista = matricula.getAvista();
+			}
 			aPrazo = aPrazoService.salvar(aPrazo);
 			aVista = null;
 		} else {
+			if(matricula.getAprazo() != null){
+				tempAPrazo = matricula.getAprazo();
+			}
 			aVista = aVistaService.salvar(aVista);
 			aPrazo = null;
 		}
 
 		matricula.setAprazo(aPrazo);
 		matricula.setAvista(aVista);
+		matricula.setAluno(aluno);
+		matricula.setTurma(turma);
 
 		matricula = matriculaService.salvar(matricula);
+		
+		if(tempAVista != null)
+			aVistaService.remover(tempAVista);
+		if(tempAPrazo != null)
+			aPrazoService.remover(tempAPrazo);
 		if (modoInsercao) {
 			Util.addInfo("Inserção", "A matrícula foi inserida com sucesso!");
 		} else {
@@ -191,6 +202,8 @@ public class MatriculaMB implements Serializable {
 		aPrazo = new APrazo();
 		matricula = new Matricula();
 
+		compoAprazo = false;
+		compoAvista = false;
 		habilitarCorpo = false;
 		modoAlteracao = false;
 		modoInsercao = false;
@@ -232,30 +245,27 @@ public class MatriculaMB implements Serializable {
 			Instrutor instrutor = new Instrutor();
 			instrutor.setCpf(aluno.getCpf());
 			instrutor = instrutorService.getById(instrutor);
-			
+
 			if (instrutor != null) {
 				Util.addErro("CPF Inválido", "O CPF já está sendo utilizado por um instrutor.");
 				focus = "txtCpf";
 			} else {
-				Aluno consultaAluno = alunoService.getById(aluno);
+				aluno = alunoService.getById(aluno);
 
 				habilitarCorpo = true;
-				if (consultaAluno != null) {
-					Matricula consultaMatricula = matriculaService.getMatriculaByIds(aluno.getCpf(),
-					turma.getSiglaTurma());
-					
+				if (aluno != null) {
+					Matricula consultaMatricula = matriculaService.getMatriculaByIds(aluno, turma);
+
 					if (consultaMatricula != null) {
 						matricula = consultaMatricula;
 						modoAlteracao = true;
 						modoInsercao = false;
 						if (matricula.getAprazo() != null) {
-							compoAprazo = true;
-							aPrazo = aPrazoService.getAprazoById(matricula.getAprazo().getCodigo());
+							selecionado = "Aprazo";
 						} else {
-							compoAvista = true;
-							aVista = aVistaService.getAvistaById(matricula.getAvista().getCodigo());
+							selecionado = "Avista";
 						}
-
+						selecionaRadio();
 					} else {
 						modoAlteracao = false;
 						modoInsercao = true;
@@ -321,5 +331,20 @@ public class MatriculaMB implements Serializable {
 		this.aVista = aVista;
 	}
 
-	
+	public void selecionaRadio() {
+		if (selecionado.compareTo("Aprazo") == 0) {
+			if(matricula.getAprazo() != null)
+				aPrazo = aPrazoService.getAprazoById(matricula.getAprazo().getCodigo());
+			compoAprazo = true;
+			compoAvista = false;
+			aVista = new AVista();
+		} else {
+			if(matricula.getAvista() != null)
+				aVista = aVistaService.getAvistaById(matricula.getAvista().getCodigo());
+			compoAvista = true;
+			compoAprazo = false;
+			aPrazo = new APrazo();
+		}
+
+	}
 }

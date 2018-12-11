@@ -5,7 +5,6 @@ import java.util.List;
 
 import fatec.pweb.dao.APrazoDAO;
 import fatec.pweb.model.APrazo;
-import fatec.pweb.model.Matricula;
 
 public class APrazoService implements Serializable {
 

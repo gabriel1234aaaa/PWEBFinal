@@ -1,7 +1,7 @@
 package fatec.pweb.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -15,7 +15,7 @@ public class Instrutor extends Pessoa implements Serializable {
 	private String formacao;
 	private String areaAtuacao;
 	@OneToMany(mappedBy = "instrutor")
-	private ArrayList<Turma> turmas = new ArrayList<>();
+	private List<Turma> turmas;
 
 	public Instrutor() {
 	}
@@ -40,11 +40,11 @@ public class Instrutor extends Pessoa implements Serializable {
 		this.areaAtuacao = areaAtuacao;
 	}
 
-	public ArrayList<Turma> getTurmas() {
+	public List<Turma> getTurmas() {
 		return turmas;
 	}
 
-	public void setTurmas(ArrayList<Turma> turmas) {
+	public void setTurmas(List<Turma> turmas) {
 		this.turmas = turmas;
 	}
 

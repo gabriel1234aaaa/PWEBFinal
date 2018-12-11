@@ -1,7 +1,7 @@
 package fatec.pweb.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,7 +25,7 @@ public class Turma implements Serializable {
 	@ManyToOne
 	private Curso curso;
 	@OneToMany(mappedBy = "turma")
-	private ArrayList<Matricula> matriculas = new ArrayList<>();
+	private List<Matricula> matriculas;
 
 	public Turma() {
 	}
@@ -107,11 +107,11 @@ public class Turma implements Serializable {
 		this.curso = curso;
 	}
 
-	public ArrayList<Matricula> getMatriculas() {
+	public List<Matricula> getMatriculas() {
 		return matriculas;
 	}
 
-	public void setMatriculas(ArrayList<Matricula> matriculas) {
+	public void setMatriculas(List<Matricula> matriculas) {
 		this.matriculas = matriculas;
 	}
 

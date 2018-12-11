@@ -65,6 +65,8 @@
 			<h:panelGrid columns="1" cellpadding="5">
 				<p:selectOneRadio id="customRadio" value="#{matriculaMB.selecionado}"
 					layout="custom">
+					<p:ajax listener="#{matriculaMB.selecionaRadio}"
+						update="txtAgencia txtNumCheque txtDtPag txtQtdMens txtTaxJuros txtDtVenc" render="@all" />
 					<f:selectItem itemLabel="À Vista" itemValue="Avista" />
 					<f:selectItem itemLabel="Parcelado" itemValue="Aprazo" />
 				</p:selectOneRadio>
@@ -72,7 +74,7 @@
 				<h:panelGrid columns="9" cellpadding="5">
 
 					<h:outputLabel for="rdbAvista" value="À Vista" />
-					<p:radioButton id="rdbAvista" for="customRadio" itemIndex="0" disabled="#{matriculaMB.habilitarCorpo}"/>
+					<p:radioButton id="rdbAvista" for="customRadio" itemIndex="0" disabled="#{not matriculaMB.habilitarCorpo}"/>
 
 					<p:outputLabel value="" />
 
@@ -92,7 +94,7 @@
 						disabled="#{not matriculaMB.compoAvista}" required="false" />
 
 					<h:outputLabel for="rdbAprazo" value="Parcelado" />
-					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1" disabled="#{matriculaMB.habilitarCorpo}"/>
+					<p:radioButton id="rdbAprazo" for="customRadio" itemIndex="1" disabled="#{not matriculaMB.habilitarCorpo}"/>
 
 					<p:outputLabel value="" />
 
